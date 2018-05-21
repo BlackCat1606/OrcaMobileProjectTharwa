@@ -32,8 +32,8 @@ import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular";
 
 
 const fs = require("file-system");
-
 registerElement("Gradient", () => require("nativescript-gradient").Gradient);
+registerElement("FAB", () => require("nativescript-floatingactionbutton").Fab);
 const server = isAndroid ? "http://192.168.0.39:8080" : "http://192.168.0.39:8080";
 setStatusBarColors();
 Config.isTablet = device.deviceType === DeviceType.Tablet;

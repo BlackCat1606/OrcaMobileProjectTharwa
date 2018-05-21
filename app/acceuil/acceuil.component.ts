@@ -119,7 +119,7 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
   choice: string = "";
   cpt = 0;
   init = 0;
-  myIndex: number;
+  myIndex;
 
 
  
@@ -219,7 +219,7 @@ getComptesInfo() {
 }
 
 ngAfterViewInit() {
-    this.myIndex = 1;
+    
     this.getComptesInfo();
 }
 
