@@ -15,7 +15,8 @@ import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
 import { Config } from "~/shared/config";
 import { ListPicker } from "tns-core-modules/ui/list-picker/list-picker";
 import { RadDataFormComponent } from "nativescript-ui-dataform/angular";
-import { VirementData } from "./VirementData";
+import { VirementData } from "~/virement/VirementData";
+
 
 
 @Component({
