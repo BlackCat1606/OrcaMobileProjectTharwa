@@ -3,15 +3,15 @@ import { animate, state, style, transition, trigger } from "@angular/animations"
 import { AbstractMenuPageComponent } from "../abstract-menu-page-component";
 import { Feedback } from "nativescript-feedback";
 import { ToastService } from "../services/toast.service";
-import { ToastHelper } from "./helpers/toast-helper";
-import { FeedbackHelper } from "./helpers/feedback-helper";
-import { FancyalertHelper } from "./helpers/fancyalert-helper";
+import { ToastHelper } from "../helpers/toast-helper";
+import { FeedbackHelper } from "../helpers/feedback-helper";
+import { FancyalertHelper } from "../helpers/fancyalert-helper";
 import { ModalDialogService } from "nativescript-angular";
-import { SnackbarHelper } from "./helpers/snackbar-helper";
-import { LocalNotificationsHelper } from "./helpers/localnotifications-helper";
+import { SnackbarHelper } from "../helpers/snackbar-helper";
+import { LocalNotificationsHelper } from "../helpers/localnotifications-helper";
 import { PluginInfo } from "../shared/plugin-info";
 import { PluginInfoWrapper } from "../shared/plugin-info-wrapper";
-import { CFAlertDialogHelper } from "./helpers/cfalertdialog-helper";
+import { CFAlertDialogHelper } from "../helpers/cfalertdialog-helper";
 import { Page, EventData, ContentView} from "ui/page";
 import { isAndroid, isIOS, device, screen } from "platform";
 import { UserService } from "../shared/user/user.service";
@@ -30,6 +30,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { AppComponent } from "~/app.component";
 import { SocketIO } from "nativescript-socketio";
 import * as LocalNotifications from "nativescript-local-notifications";
+//registerElement("FAB", () => require("nativescript-floatingactionbutton").Fab);
 const TokentTest = "VfziQohwoRBpEAQmbuD3zv0xk34tXSOB4Boe0fBgHEkxJIiacwg83eX3ebhqnhqrfsFxrJvgovIp3kyGXQB3ZbHKKQkaBpA3MKLD4AvE6jO1wYpzIxnHCrhcrhSde6kCFRqYz5ssEn0Q0zg0FrYILxtGKIgTfDs5lDNEJGNcUIHSEAloxUY42JE1BBF3MpDbGvk3os0XWT82PdzQXHn9MsDGf5iUi8WrXIC2h0nAFJMg1AAci6VsQmhKJuQDtQI";
 @Component({
   selector: "acceuil",

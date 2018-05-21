@@ -7,11 +7,6 @@ import { VirementMotifComponent } from "~/virement-motif/virement-motif.componen
 const APP_ROUTES: Routes = [
   {
     path: "",
-    redirectTo: "/acceuil",
-    pathMatch: "full"
-  },
-  {
-    path: "home",
     component: HomeComponent
   },
   {
