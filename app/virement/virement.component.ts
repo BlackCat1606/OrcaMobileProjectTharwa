@@ -2,16 +2,12 @@ import { Component, ViewContainerRef, ViewChild } from "@angular/core";
 import {trigger,query,stagger,style,animate,transition,state} from "@angular/animations";
 import { AbstractMenuPageComponent } from "../abstract-menu-page-component";
 import { Feedback } from "nativescript-feedback";
-import { ToastService } from "../services/toast.service";
-import { ToastHelper } from "./helpers/toast-helper";
-import { FeedbackHelper } from "./helpers/feedback-helper";
-import { FancyalertHelper } from "./helpers/fancyalert-helper";
+import { FeedbackHelper } from "../helpers/feedback-helper";
+import { FancyalertHelper } from "../helpers/fancyalert-helper";
 import { ModalDialogService } from "nativescript-angular";
-import { SnackbarHelper } from "./helpers/snackbar-helper";
-import { LocalNotificationsHelper } from "./helpers/localnotifications-helper";
 import { PluginInfo } from "../shared/plugin-info";
 import { PluginInfoWrapper } from "../shared/plugin-info-wrapper";
-import { CFAlertDialogHelper } from "./helpers/cfalertdialog-helper";
+import { CFAlertDialogHelper } from "../helpers/cfalertdialog-helper";
 import { AppComponent } from "~/app.component";
 import { Virement } from "~/shared/virement/virement";
 import { Compte } from "~/shared/compte/compte";
@@ -88,40 +84,35 @@ export class VirementComponent extends AbstractMenuPageComponent {
   fancyAlertHelper: FancyalertHelper;
   cfalertDialogHelper: CFAlertDialogHelper;
   feedbackHelper: FeedbackHelper;
-  localNotificationsHelper: LocalNotificationsHelper;
-  snackbarHelper: SnackbarHelper;
-  toastHelper: ToastHelper;
   virement: Virement;
   typeVirement: String;
   virementInterne: boolean;
-  accountList = ["Compte Courant", "Compte Epargene", "Compte Devise Euro", "Compte Devise Dollar"];
-  accounts: Array<string>;
-  picker;
   comission;
   compte: Compte;
-  myAccount: Compte;
   justificatif;
-  myAccountDest: Compte;unit;numCompteExterne;
+  unit;
+  numCompteExterne;
   balance;
   comptes: Array<any>;balanceAfter: number;
   monNumCompte;
 
+
+  get virementData(): VirementData {
+    return this._virementData;
+}
   private _virementData: VirementData;
+  @ViewChild("myDataForm") dataFormComp: RadDataFormComponent;
 
   constructor(protected appComponent: AppComponent,
               protected vcRef: ViewContainerRef,
               protected modalService: ModalDialogService,
-              private toastService: ToastService,
               private router: Router, private route: ActivatedRoute, 
               private userService: UserService) {
-    super(appComponent, vcRef, modalService);
 
+    super(appComponent, vcRef, modalService);
     this.fancyAlertHelper = new FancyalertHelper();
     this.cfalertDialogHelper = new CFAlertDialogHelper();
     this.feedbackHelper = new FeedbackHelper();
-    this.localNotificationsHelper = new LocalNotificationsHelper();
-    this.snackbarHelper = new SnackbarHelper();
-    this.toastHelper = new ToastHelper(this.toastService);
     this.comptes = [];
   }
 
@@ -131,11 +122,9 @@ export class VirementComponent extends AbstractMenuPageComponent {
     this.getComptesInfo();
     this.comission ="1%";
   }
-  @ViewChild("myDataForm") dataFormComp: RadDataFormComponent;
+ 
 
-  get virementData(): VirementData {
-    return this._virementData;
-}
+
   getComptesInfo=()=> {
     this.userService.getInfo(Config.access_token)
       .subscribe(
@@ -224,19 +213,9 @@ export class VirementComponent extends AbstractMenuPageComponent {
       this.router.navigate(["/virementMotif"], navigationExtras);
     }
   }
-  setUnit() {
-    switch (this.virement.emetteur) {
-
-      case "0": return "Montant en DZD :";
-      case "1": return "Montant en DZD :";
-      case "2": return "Montant en EUR :";
-      case "3": return "Montant en USD :";
-        
-
-    }
-  }
   
-  liveBalance(i): String {
+  liveBalance(i): String 
+  {
     ////////// Appelez un service de simulation BackEnd pour aboutir aux balances si le virement est effictué
       return (this.balance - this._virementData.montant - 0.1*this.balance).toString();
   }

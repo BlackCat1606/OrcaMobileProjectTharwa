@@ -1,45 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Virement } from '../shared/virement/virement';
 import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
-import { UserService } from "../shared/user/user.service";
 import { VirementService } from "../shared/virement/virement.service";
 import { Config } from '../shared/config';
 import * as dialogs from "ui/dialogs";
 import { Location } from "@angular/common";
-import { SnackBar } from "nativescript-snackbar";
-import * as ApplicationSettings from "application-settings";
-import { Page } from "ui/page";
-import { isIOS } from "platform";
 import * as camera from "nativescript-camera";
-
 import { isAndroid } from "tns-core-modules/platform";
 import * as fs from "file-system";
 import * as imageSource from "image-source";
-/////////////////////////////////////////
-import {ViewContainerRef} from "@angular/core";
 import {trigger,query,stagger,style,animate,transition,state} from "@angular/animations";
-import { AbstractMenuPageComponent } from "../abstract-menu-page-component";
-import { Feedback } from "nativescript-feedback";
-import { ToastService } from "../services/toast.service";
-import { ToastHelper } from "./helpers/toast-helper";
-import { FeedbackHelper } from "./helpers/feedback-helper";
-import { FancyalertHelper } from "./helpers/fancyalert-helper";
-import { ModalDialogService } from "nativescript-angular";
-import { SnackbarHelper } from "./helpers/snackbar-helper";
-import { LocalNotificationsHelper } from "./helpers/localnotifications-helper";
-import { PluginInfo } from "../shared/plugin-info";
-import { PluginInfoWrapper } from "../shared/plugin-info-wrapper";
-import { CFAlertDialogHelper } from "./helpers/cfalertdialog-helper";
-import { AppComponent } from "~/app.component";
-import { Compte } from "~/shared/compte/compte";
-
-import { SocketIO } from "nativescript-socketio";
-
-import {ViewChild, Input, AfterViewInit, NgZone } from "@angular/core";
-
-import { User } from "../shared/user/user";
+import { FeedbackHelper } from "../helpers/feedback-helper";
+import { FancyalertHelper } from "../helpers/fancyalert-helper";
+import { LocalNotificationsHelper } from "../helpers/localnotifications-helper";
+import { CFAlertDialogHelper } from "../helpers/cfalertdialog-helper";
 import { session, Session } from "nativescript-background-http";
-import { first } from 'lodash';
 import { Subject } from "rxjs/Subject";
 
 const TokenTest ="";
@@ -231,81 +206,50 @@ export class VirementMotifComponent implements OnInit {
 
 
 private uploadMultipartImagePicker(image: any,justif:boolean): Subject<any> {
+  let fileUri;
+  let filename;
+  let mimetype;
+  let uploadType;
+  let request;
 if(justif)
 {
   let fileUri = image.fileUri;
   let filename = fileUri.substring(fileUri.lastIndexOf('/') + 1);
   let mimetype = filename.substring(filename.lastIndexOf('.') + 1);
-  let uploadType;
-  let request;
-  uploadType = "image";
-  request = {
-      url: Config.apiAddress+"/virement/VirementClientTh",
-      method: "POST",
-      headers: {
-          "Content-Type": "application/form-data",
-          "token":Config.access_token
-      }
-  };
-
-
-
-  // let params = [{ "name":"upload", "filename": fileUri, "mimeType": "image/png" }];
-  let params = [
-      { name: "Montant", value: this.virement.montant },
-      { name: "CompteDestinataire", value: this.virement.destinataire },
-      { name: "Motif", value: this.virement.motif },
-      { name: "avatar", filename: fileUri, mimeType: `${uploadType}/${mimetype}` }];
-  console.log(JSON.stringify(params));
-  let subject = new Subject<any>();
-  let task = this.UploadSession.multipartUpload(params, request);
-  task.on('progress', (e: any) => subject.next(e));
-
-  task.on('error', (e) => subject.error(e));
-
-  task.on('complete', (e) => subject.complete());
-
-  return subject;
 }
 else{
   let fileUri = "";
   let filename = "";
   let mimetype = "";
-  let uploadType;
-  let request;
-  uploadType = "image";
-  request = {
-      url: Config.apiAddress+"/virement/VirementClientTh",
-      method: "POST",
-      headers: {
-          "Content-Type": "application/form-data",
-          "token":Config.access_token
-      }
-  };
-
-
-
-  // let params = [{ "name":"upload", "filename": fileUri, "mimeType": "image/png" }];
-  let params = [
-      { name: "Montant", value: this.virement.montant },
-      { name: "CompteDestinataire", value: this.virement.destinataire },
-      { name: "Motif", value: this.virement.motif },
-      { name: "avatar", filename: "", mimeType: "jpg" }];
-  console.log(JSON.stringify(params));
-  let subject = new Subject<any>();
-  let task = this.UploadSession.multipartUpload(params, request);
-  task.on('progress', (e: any) => subject.next(e));
-
-  task.on('error', (e) => subject.error(e));
-
-  task.on('complete', (e) => subject.complete());
-
-  return subject;
 }
+uploadType = "image";
+request = {
+    url: Config.apiAddress+"/virement/VirementClientTh",
+    method: "POST",
+    headers: {
+        "Content-Type": "application/form-data",
+        "token":Config.access_token
+    }
+};
+
+let params = [
+    { name: "Montant", value: this.virement.montant },
+    { name: "CompteDestinataire", value: this.virement.destinataire },
+    { name: "Motif", value: this.virement.motif },
+    { name: "avatar", filename: fileUri, mimeType: "jpg" }];
+console.log(JSON.stringify(params));
+let subject = new Subject<any>();
+let task = this.UploadSession.multipartUpload(params, request);
+task.on('progress', (e: any) => subject.next(e));
+
+task.on('error', (e) => subject.error(e));
+
+task.on('complete', (e) => subject.complete());
+
+return subject;
 }
 
-
-  submit() {
+submit() {
     if (this.virement.motif) {
     
       if(this.justificatif == 1)
