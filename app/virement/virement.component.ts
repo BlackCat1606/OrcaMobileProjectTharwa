@@ -1,7 +1,6 @@
 import { Component, ViewContainerRef, ViewChild } from "@angular/core";
 import {trigger,query,stagger,style,animate,transition,state} from "@angular/animations";
 import { AbstractMenuPageComponent } from "../abstract-menu-page-component";
-import { Feedback } from "nativescript-feedback";
 import { FeedbackHelper } from "../helpers/feedback-helper";
 import { FancyalertHelper } from "../helpers/fancyalert-helper";
 import { ModalDialogService } from "nativescript-angular";
@@ -16,8 +15,7 @@ import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
 import { Config } from "~/shared/config";
 import { ListPicker } from "tns-core-modules/ui/list-picker/list-picker";
 import { RadDataFormComponent } from "nativescript-ui-dataform/angular";
-import { VirementData } from "~/virement/VirementData";
-import { SocketIO } from "nativescript-socketio";
+import { VirementData } from "./VirementData";
 
 
 @Component({
