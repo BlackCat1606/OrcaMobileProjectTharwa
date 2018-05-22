@@ -1,17 +1,10 @@
 import { NgModule, NgZone, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
-
 import { routing } from "./app.routing";
 import { AppComponent } from "./app.component";
 import { setStatusBarColors } from "./utils/status-bar-util";
 import { Config } from "./shared/config";
-import {
-  NativeScriptFormsModule,
-  NativeScriptRouterModule,
-  registerElement,
-  RouterExtensions,
-  NativeScriptHttpModule
-} from "nativescript-angular";
+import {NativeScriptFormsModule, NativeScriptRouterModule, registerElement, RouterExtensions, NativeScriptHttpModule} from "nativescript-angular";
 import { TNSFontIconModule } from "nativescript-ngx-fonticon";
 import { NativeScriptAnimationsModule } from "nativescript-angular/animations";
 import { AppShortcuts } from "nativescript-app-shortcuts";
