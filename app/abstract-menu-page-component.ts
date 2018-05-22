@@ -11,8 +11,8 @@ export abstract class AbstractMenuPageComponent {
   isTablet: boolean = Config.isTablet;
 
   constructor(protected appComponent: AppComponent,
-              protected vcRef: ViewContainerRef,
-              protected modalService: ModalDialogService) {
+    protected vcRef: ViewContainerRef,
+    protected modalService: ModalDialogService) {
   }
 
   protected abstract getPluginInfo(): PluginInfoWrapper;

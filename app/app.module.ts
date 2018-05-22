@@ -69,7 +69,7 @@ Config.isTablet = device.deviceType === DeviceType.Tablet;
     InfoModalComponent
   ],
   entryComponents: [
-      InfoModalComponent
+    InfoModalComponent
   ],
   providers: [
     ToastService
@@ -82,7 +82,7 @@ export class AppModule {
   private deeplink: string;
 
   constructor(private routerExtensions: RouterExtensions,
-              private zone: NgZone) {
+    private zone: NgZone) {
 
     if (Config.isTablet) {
       let cssFileName = fs.path.join(fs.knownFolders.currentApp().path, "app.tablet.css");

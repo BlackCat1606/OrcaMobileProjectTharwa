@@ -1,7 +1,6 @@
 import { User } from "./user/user";
 
 
-export class CurrentUser
-{
+export class CurrentUser {
     static currentUser: User;
 }

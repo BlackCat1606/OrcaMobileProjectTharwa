@@ -8,6 +8,6 @@ export class Compte {
   dateCreation: string;
   etat: string;
   type: number;
-  public constructor(){}
+  public constructor() { }
 
 }

@@ -10,6 +10,6 @@ export class Historical {
   emRec: string;
   interlocuteur: string;
 
-  constructor(){}
+  constructor() { }
 
 }

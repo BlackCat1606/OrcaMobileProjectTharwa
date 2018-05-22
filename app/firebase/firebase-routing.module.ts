@@ -5,7 +5,7 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { FirebaseComponent } from "./firebase.component";
 
 const routes: Routes = [
-  {path: "", component: FirebaseComponent}
+  { path: "", component: FirebaseComponent }
 ];
 
 @NgModule({

@@ -21,7 +21,7 @@ export class InfoModalComponent {
   isTablet: boolean = Config.isTablet;
 
   constructor(private params: ModalDialogParams,
-              private page: Page) {
+    private page: Page) {
     this.pluginInfo = params.context;
 
     this.page.on("unloaded", () => {

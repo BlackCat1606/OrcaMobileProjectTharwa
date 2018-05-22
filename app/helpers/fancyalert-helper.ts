@@ -7,27 +7,27 @@ export class FancyalertHelper {
   constructor() {
   }
 
-  showSuccess(title,message): void {
+  showSuccess(title, message): void {
     TNSFancyAlert.showSuccess(title, message, "OK");
   }
 
-  showInfo(title,message): void {
+  showInfo(title, message): void {
     TNSFancyAlert.showInfo(title, message, "OK");
   }
 
-  showNotice(title,message): void {
-    TNSFancyAlert.showNotice(title, message,"OK");
+  showNotice(title, message): void {
+    TNSFancyAlert.showNotice(title, message, "OK");
   }
 
-  showWarning(title,message): void {
+  showWarning(title, message): void {
     TNSFancyAlert.showError(title, message, "OK");
   }
 
-  showError(title,message): void {
+  showError(title, message): void {
     TNSFancyAlert.showError(title, message, "OK");
   }
 
-  showWaiting(title,message): void {
+  showWaiting(title, message): void {
     TNSFancyAlert.showWaiting(title, message, "ok", 5);
   }
 

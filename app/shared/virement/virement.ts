@@ -8,5 +8,5 @@ export class Virement {
     motif: string;
     status: string;
 
-    constructor() {}
+    constructor() { }
 }

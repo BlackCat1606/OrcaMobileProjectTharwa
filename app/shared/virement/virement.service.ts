@@ -5,23 +5,23 @@ import "rxjs/add/operator/catch";
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import {HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 
 import { Virement } from "./virement";
-import {Config} from "../config";
+import { Config } from "../config";
 
 @Injectable()
-export class VirementService  {
+export class VirementService {
 
 
-    constructor(private http: Http) {}
+    constructor(private http: Http) { }
 
-    sendVirement(accessToken,virement: Virement) {
-        var headers = new Headers();
+    sendVirement(accessToken, virement: Virement) {
+        let headers = new Headers();
         headers.append("Content-Type", "application/x-www-form-urlencoded");
-        headers.append("token",accessToken);
+        headers.append("token", accessToken);
         const body = "montant=" + virement.montant + "&type1=" + virement.emetteur + "&type2=" + virement.destinataire + "&motif=" + virement.motif;
-        return this.http.post(Config.apiAddress+"/virement/local", body, {headers: headers});
+        return this.http.post(Config.apiAddress + "/virement/local", body, { headers: headers });
     }
 
     handleErrors(error: Response) {

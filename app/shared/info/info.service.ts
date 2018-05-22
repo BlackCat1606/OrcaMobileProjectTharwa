@@ -5,44 +5,40 @@ import "rxjs/add/operator/catch";
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { HttpHeaders, HttpClientModule,HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClientModule, HttpClient } from '@angular/common/http';
 
 
-import {Info } from "./info";
-import  {Config} from "../config";
+import { Info } from "./info";
+import { Config } from "../config";
 
 
 @Injectable()
 export class InfoService implements OnInit {
-ngOnInit()
-{
+  ngOnInit() {
 
-}
-constructor(private http: Http) {}
-demanderInfo(info :Info,token)
-{
-  var headers = new Headers();
-  
+  }
+  constructor(private http: Http) { }
+  demanderInfo(info: Info, token) {
+    let headers = new Headers();
 
-  headers.append("Content-Type", "application/x-www-form-urlencoded");
-  headers.append("Authorization",token);    
 
-  //const body="userId="+user.email+"&Pwd="+user.password+"&code=0"
+    headers.append("Content-Type", "application/x-www-form-urlencoded");
+    headers.append("Authorization", token);
 
-  //return this.http.post('http://auththarwa.cleverapps.io/oauth/code',body, {headers: headers})
-  return this.http.get(Config.oauthAddress+"/oauth/info",{headers: headers})
-  .catch(this.handleErrors);
-}
+
+    return this.http.get(Config.oauthAddress + "/oauth/info", { headers: headers })
+      .catch(this.handleErrors);
+  }
 
   getCommonHeaders() {
     let headers = new Headers();
-   headers.append("Content-Type", "application/x-www-form-urlencoded");
-   headers.append("Authorization","Basic c0xPUEthRXNDc0JoTmRzVGdRTExJVDlZeVpVU1FveVJ1bW5VcmI0NFAzdURsaWNZdHY1MVkxazlCdHpVNGVIVzpjMHhQVUV0aFJYTkRjMEpvVG1SelZHZFJURXhKVkRsWmVWcFZVMUZ2ZVZKMWJXNVZjbUkwTkZBemRVUnNhV05aZEhZMU1Wa3hhemxDZEhwVk5HVklWenB3VHpaSE5raHBkRkYzVldWSE9FNXZhMjl2VkZwVFNWaElSV1ZpZEhoUFRtbGxibE5FU2xkcFoxazJlbUo1YW0xeU1VOVNUSEo1Y210dWJHMVhVM1pZ");    
+    headers.append("Content-Type", "application/x-www-form-urlencoded");
+    headers.append("Authorization", "Basic c0xPUEthRXNDc0JoTmRzVGdRTExJVDlZeVpVU1FveVJ1bW5VcmI0NFAzdURsaWNZdHY1MVkxazlCdHpVNGVIVzpjMHhQVUV0aFJYTkRjMEpvVG1SelZHZFJURXhKVkRsWmVWcFZVMUZ2ZVZKMWJXNVZjbUkwTkZBemRVUnNhV05aZEhZMU1Wa3hhemxDZEhwVk5HVklWenB3VHpaSE5raHBkRkYzVldWSE9FNXZhMjl2VkZwVFNWaElSV1ZpZEhoUFRtbGxibE5FU2xkcFoxazJlbUo1YW0xeU1VOVNUSEo1Y210dWJHMVhVM1pZ");
     return headers;
   }
 
   handleErrors(error: Response) {
-  
+
     console.log(JSON.stringify(error.json()));
     return Observable.throw(error);
   }

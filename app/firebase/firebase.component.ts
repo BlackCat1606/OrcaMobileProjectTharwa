@@ -102,9 +102,9 @@ export class FirebaseComponent extends AbstractMenuPageComponent implements OnIn
   @ViewChild("citiesListView") listViewComponent: RadListViewComponent;
 
   constructor(protected appComponent: AppComponent,
-              protected vcRef: ViewContainerRef,
-              protected modalService: ModalDialogService,
-              private zone: NgZone) {
+    protected vcRef: ViewContainerRef,
+    protected modalService: ModalDialogService,
+    private zone: NgZone) {
     super(appComponent, vcRef, modalService);
   }
 
@@ -144,22 +144,22 @@ export class FirebaseComponent extends AbstractMenuPageComponent implements OnIn
 
   loginWithGoogle(): void {
     this.loadingUser = true;
-    firebaseLogin({type: LoginType.GOOGLE})
-        .then(result => {
-          this.user = result;
-          this.loadingUser = false;
-          appSettings.setBoolean(FirebaseComponent.APP_SETTINGS_KEY_HAS_LOGGED_IN_WITH_GOOGLE, true);
-        })
-        .catch(err => this.loadingUser = false);
+    firebaseLogin({ type: LoginType.GOOGLE })
+      .then(result => {
+        this.user = result;
+        this.loadingUser = false;
+        appSettings.setBoolean(FirebaseComponent.APP_SETTINGS_KEY_HAS_LOGGED_IN_WITH_GOOGLE, true);
+      })
+      .catch(err => this.loadingUser = false);
   }
 
   logout(): void {
     firebaseLogout()
-        .then(() => {
-          this.user = null;
-          appSettings.setBoolean(FirebaseComponent.APP_SETTINGS_KEY_HAS_LOGGED_IN_WITH_GOOGLE, false);
-        })
-        .catch(err => console.log("Logout error: " + err));
+      .then(() => {
+        this.user = null;
+        appSettings.setBoolean(FirebaseComponent.APP_SETTINGS_KEY_HAS_LOGGED_IN_WITH_GOOGLE, false);
+      })
+      .catch(err => console.log("Logout error: " + err));
   }
 
   fabTapped(): void {
@@ -172,12 +172,12 @@ export class FirebaseComponent extends AbstractMenuPageComponent implements OnIn
       if (result.result && result.text) {
         let name = result.text.trim().length === 0 ? undefined : result.text.trim();
         this.citiesCollectionRef.add(
-            {
-              name: name,
-              author: this.user ? this.user.email : "Anonymous"
-            })
-            .then(() => ad && ad.dismissSoftInput())
-            .catch(err => console.log(`Create err: ${err}`));
+          {
+            name: name,
+            author: this.user ? this.user.email : "Anonymous"
+          })
+          .then(() => ad && ad.dismissSoftInput())
+          .catch(err => console.log(`Create err: ${err}`));
       }
     });
   }
@@ -210,18 +210,18 @@ export class FirebaseComponent extends AbstractMenuPageComponent implements OnIn
 
     if (args.data.x > 0) {
       const leftDimensions = View.measureChild(
-          <View>this.leftItem.parent,
-          this.leftItem,
-          layout.makeMeasureSpec(Math.abs(args.data.x), layout.EXACTLY),
-          layout.makeMeasureSpec(this.mainView.getMeasuredHeight(), layout.EXACTLY));
+        <View>this.leftItem.parent,
+        this.leftItem,
+        layout.makeMeasureSpec(Math.abs(args.data.x), layout.EXACTLY),
+        layout.makeMeasureSpec(this.mainView.getMeasuredHeight(), layout.EXACTLY));
       View.layoutChild(<View>this.leftItem.parent, this.leftItem, 0, 0, leftDimensions.measuredWidth, leftDimensions.measuredHeight);
       this.hideOtherSwipeTemplateView("left");
     } else {
       const rightDimensions = View.measureChild(
-          <View>this.rightItem.parent,
-          this.rightItem,
-          layout.makeMeasureSpec(Math.abs(args.data.x), layout.EXACTLY),
-          layout.makeMeasureSpec(this.mainView.getMeasuredHeight(), layout.EXACTLY));
+        <View>this.rightItem.parent,
+        this.rightItem,
+        layout.makeMeasureSpec(Math.abs(args.data.x), layout.EXACTLY),
+        layout.makeMeasureSpec(this.mainView.getMeasuredHeight(), layout.EXACTLY));
 
       View.layoutChild(<View>this.rightItem.parent, this.rightItem, this.mainView.getMeasuredWidth() - rightDimensions.measuredWidth, 0, this.mainView.getMeasuredWidth(), rightDimensions.measuredHeight);
       this.hideOtherSwipeTemplateView("right");
@@ -243,12 +243,12 @@ export class FirebaseComponent extends AbstractMenuPageComponent implements OnIn
         if (result.result) {
           city.name = result.text.trim().length === 0 ? undefined : result.text.trim();
           this.citiesCollectionRef.doc(city.id).update(
-              {
-                name: city.name,
-                author: this.user ? this.user.email : "Anonymous"
-              })
-              .then(() => ad && ad.dismissSoftInput())
-              .catch(err => console.log(`Update err: ${err}`));
+            {
+              name: city.name,
+              author: this.user ? this.user.email : "Anonymous"
+            })
+            .then(() => ad && ad.dismissSoftInput())
+            .catch(err => console.log(`Update err: ${err}`));
         }
       });
 
@@ -263,12 +263,12 @@ export class FirebaseComponent extends AbstractMenuPageComponent implements OnIn
         if (result.result) {
           city.population = +(result.text.trim().length === 0 ? undefined : result.text.trim());
           this.citiesCollectionRef.doc(city.id).update(
-              {
-                population: city.population,
-                author: this.user ? this.user.email : "Anonymous"
-              })
-              .then(() => ad && ad.dismissSoftInput())
-              .catch(err => console.log(`Update err: ${err}`));
+            {
+              population: city.population,
+              author: this.user ? this.user.email : "Anonymous"
+            })
+            .then(() => ad && ad.dismissSoftInput())
+            .catch(err => console.log(`Update err: ${err}`));
         }
       });
     }
@@ -279,8 +279,8 @@ export class FirebaseComponent extends AbstractMenuPageComponent implements OnIn
     this.listViewComponent.listView.notifySwipeToExecuteFinished();
 
     this.citiesCollectionRef.doc(city.id).delete()
-        .then(() => console.log(`Delete city '${city.name}'`))
-        .catch(err => console.log(`Delete err: ${err}`));
+      .then(() => console.log(`Delete city '${city.name}'`))
+      .catch(err => console.log(`Delete err: ${err}`));
   }
 
   hideOtherSwipeTemplateView(currentSwipeView: string) {
@@ -302,20 +302,20 @@ export class FirebaseComponent extends AbstractMenuPageComponent implements OnIn
 
   protected getPluginInfo(): PluginInfoWrapper {
     return new PluginInfoWrapper(
-        "Google's cloud storage product, but it can do a whole lot more! This app includes 3 of those sub modules.",
-        Array.of(
-            new PluginInfo(
-                "nativescript-ui-listview",
-                "NativeScript UI ListView",
-                "https://www.npmjs.com/package/nativescript-ui-listview",
-                "The ListView is one of the components that used to be part of Progress NativeScript UI, but now lives on its own. For other components see https://www.npmjs.com/package/nativescript-pro-ui."
-            ),
+      "Google's cloud storage product, but it can do a whole lot more! This app includes 3 of those sub modules.",
+      Array.of(
+        new PluginInfo(
+          "nativescript-ui-listview",
+          "NativeScript UI ListView",
+          "https://www.npmjs.com/package/nativescript-ui-listview",
+          "The ListView is one of the components that used to be part of Progress NativeScript UI, but now lives on its own. For other components see https://www.npmjs.com/package/nativescript-pro-ui."
+        ),
 
-            new PluginInfo(
-                "nativescript-plugin-firebase",
-                "Firebase",
-                "https://github.com/EddyVerbruggen/nativescript-plugin-firebase",
-                `CLOUD FIRESTORE: A flexible, scalable database which keeps your data in sync across client apps through realtime listeners and offers offline support so you can build responsive apps that work regardless of network latency or Internet connectivity.
+        new PluginInfo(
+          "nativescript-plugin-firebase",
+          "Firebase",
+          "https://github.com/EddyVerbruggen/nativescript-plugin-firebase",
+          `CLOUD FIRESTORE: A flexible, scalable database which keeps your data in sync across client apps through realtime listeners and offers offline support so you can build responsive apps that work regardless of network latency or Internet connectivity.
 
 GOOGLE AUTH: You can let your users authenticate with Firebase using their Google Accounts. This is just one of the support authentication methods Firebase offers.
 
@@ -323,13 +323,13 @@ ANALYTICS: Google Analytics for Firebase is a free app measurement solution that
 
 CRASHLYTICS: Get clear, actionable insight into app issues with this powerful crash reporting solution.`),
 
-            new PluginInfo(
-                "nativescript-floatingactionbutton",
-                "FAB",
-                "https://github.com/bradmartin/nativescript-floatingactionbutton",
-                "Add a Material Design Floating Action Button to your page, at a corner of your liking."
-            )
+        new PluginInfo(
+          "nativescript-floatingactionbutton",
+          "FAB",
+          "https://github.com/bradmartin/nativescript-floatingactionbutton",
+          "Add a Material Design Floating Action Button to your page, at a corner of your liking."
         )
+      )
     );
   }
 }

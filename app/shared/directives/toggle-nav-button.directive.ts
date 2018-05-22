@@ -22,7 +22,7 @@ export class TKToggleNavButtonDirective {
         navigationButton.visibility = "visible";
 
         if (android) {
-            navigationButton.icon = "res://ic_arrow_back_black_24dp"
+            navigationButton.icon = "res://ic_arrow_back_black_24dp";
             navigationButton.on("tap", (args: EventData) => {
                 ad.dismissSoftInput();
                 this.routerExtensions.backToPreviousPage();

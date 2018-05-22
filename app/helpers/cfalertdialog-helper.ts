@@ -93,8 +93,8 @@ export class CFAlertDialogHelper {
 
   showSingleChoiceList(): void {
     const items: any = ["Vers un de Vos Comptes",
-     "Vers un autre client Tharwa", 
-     "Vers un compte externe"];
+      "Vers un autre client Tharwa",
+      "Vers un compte externe"];
     let selection: string;
     const options: any = {
       dialogStyle: CFAlertStyle.ALERT,

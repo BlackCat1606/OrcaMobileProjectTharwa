@@ -6,7 +6,7 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { AcceuilComponent } from "./acceuil.component";
 
 const routes: Routes = [
-  {path: "", component: AcceuilComponent}
+  { path: "", component: AcceuilComponent }
 ];
 
 @NgModule({

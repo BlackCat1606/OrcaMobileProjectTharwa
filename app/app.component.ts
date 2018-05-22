@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild,OnDestroy } from "@angular/core";
+import { AfterViewInit, Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
 import * as application from "tns-core-modules/application";
 import { isIOS } from "tns-core-modules/platform";
 import { Config } from "~/shared/config";
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private hasIOSSafeAreaInsets = isIOS && application.ios.window.safeAreaInsets && application.ios.window.safeAreaInsets.bottom > 0;
 
-  constructor(private router: Router,private socketIO: SocketIO) {}
+  constructor(private router: Router, private socketIO: SocketIO) { }
 
   ngOnInit(): void {
     this.socketIO.connect();
@@ -52,12 +52,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     firebase.init().then(
-        instance => {
-          console.log("firebase.init done");
-        },
-        error => {
-          console.log(`firebase.init error: ${error}`);
-        }
+      instance => {
+        console.log("firebase.init done");
+      },
+      error => {
+        console.log(`firebase.init error: ${error}`);
+      }
     );
   }
 
@@ -117,5 +117,5 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnDestroy() {
     this.socketIO.disconnect();
-}
+  }
 }

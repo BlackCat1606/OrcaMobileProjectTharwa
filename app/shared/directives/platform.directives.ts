@@ -4,7 +4,7 @@ import { DEVICE } from "nativescript-angular/platform-providers";
 
 @Directive({ selector: "[tkIfAndroid]" })
 export class TKIfAndroidDirective {
-    constructor( @Inject(DEVICE) device: Device, container: ViewContainerRef, templateRef: TemplateRef<Object>) {
+    constructor(@Inject(DEVICE) device: Device, container: ViewContainerRef, templateRef: TemplateRef<Object>) {
         if (device.os === platformNames.android) {
             container.createEmbeddedView(templateRef);
         }
@@ -13,7 +13,7 @@ export class TKIfAndroidDirective {
 
 @Directive({ selector: "[tkIfIOS]" })
 export class TKIfIOSDirective {
-    constructor( @Inject(DEVICE) device: Device, container: ViewContainerRef, templateRef: TemplateRef<Object>) {
+    constructor(@Inject(DEVICE) device: Device, container: ViewContainerRef, templateRef: TemplateRef<Object>) {
         if (device.os === platformNames.ios) {
             container.createEmbeddedView(templateRef);
         }

@@ -6,7 +6,7 @@ export class LocalNotificationsHelper {
   constructor() {
   }
 
-  showWithSound(myTitle:string,myMessage:string): void {
+  showWithSound(myTitle: string, myMessage: string): void {
     LocalNotifications.schedule([{
       id: 1,
       title: myTitle as string,

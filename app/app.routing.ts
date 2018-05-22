@@ -24,16 +24,16 @@ const APP_ROUTES: Routes = [
   {
     path: "firebase",
     loadChildren: "./firebase/firebase.module#FirebaseModule"
-  }, 
+  },
   {
     path: "virement",
     loadChildren: "./virement/virement.module#VirementModule"
-  }, 
+  },
   {
-    path:"virementMotif",
-    component:VirementMotifComponent
+    path: "virementMotif",
+    component: VirementMotifComponent
   },
 ];
 
 // TODO swap
-export const routing = NativeScriptRouterModule.forRoot(APP_ROUTES, {preloadingStrategy: PreloadAllModules});
+export const routing = NativeScriptRouterModule.forRoot(APP_ROUTES, { preloadingStrategy: PreloadAllModules });

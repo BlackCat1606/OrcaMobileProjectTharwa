@@ -5,7 +5,7 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { VirementComponent } from "./virement.component";
 
 const routes: Routes = [
-  {path: "", component: VirementComponent}
+  { path: "", component: VirementComponent }
 ];
 
 @NgModule({

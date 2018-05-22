@@ -16,8 +16,8 @@ import { AppComponent } from "~/app.component";
   moduleId: module.id,
   templateUrl: "./input.component.html",
   styleUrls: [
-      "input-common.css",
-      "input.css"
+    "input-common.css",
+    "input.css"
   ],
   animations: [
     trigger("from-bottom", [
@@ -62,9 +62,9 @@ export class InputComponent extends AbstractMenuPageComponent implements OnInit 
   checkboxHelper: CheckboxHelper;
 
   constructor(protected appComponent: AppComponent,
-              protected vcRef: ViewContainerRef,
-              protected modalService: ModalDialogService,
-              private zone: NgZone) {
+    protected vcRef: ViewContainerRef,
+    protected modalService: ModalDialogService,
+    private zone: NgZone) {
     super(appComponent, vcRef, modalService);
   }
 
@@ -113,38 +113,38 @@ export class InputComponent extends AbstractMenuPageComponent implements OnInit 
 
   protected getPluginInfo(): PluginInfoWrapper {
     let plugins = Array.of(
-        new PluginInfo(
-            "nativescript-drawingpad",
-            "DrawingPad",
-            "https://github.com/bradmartin/nativescript-texttospeech",
-            "Want to capture a signature, or send doodles from one user to the other? Then this is the plugin for you!"),
+      new PluginInfo(
+        "nativescript-drawingpad",
+        "DrawingPad",
+        "https://github.com/bradmartin/nativescript-texttospeech",
+        "Want to capture a signature, or send doodles from one user to the other? Then this is the plugin for you!"),
 
-        new PluginInfo(
-            "nativescript-checkbox",
-            "Checkbox",
-            "https://github.com/bradmartin/nativescript-checkbox",
-            "Add checkboxes and radiobuttons to your app!"),
+      new PluginInfo(
+        "nativescript-checkbox",
+        "Checkbox",
+        "https://github.com/bradmartin/nativescript-checkbox",
+        "Add checkboxes and radiobuttons to your app!"),
 
-        new PluginInfo(
-            "nativescript-numeric-keyboard",
-            "Numeric Keyboard (iOS)  🔢",
-            "https://github.com/EddyVerbruggen/nativescript-numeric-keyboard",
-            "Replace the meh default number/phone keyboard by this stylish one."
-        )
+      new PluginInfo(
+        "nativescript-numeric-keyboard",
+        "Numeric Keyboard (iOS)  🔢",
+        "https://github.com/EddyVerbruggen/nativescript-numeric-keyboard",
+        "Replace the meh default number/phone keyboard by this stylish one."
+      )
     );
 
     if (this.isIOS) {
       plugins.push(new PluginInfo(
-          "nativescript-IQKeyboardManager",
-          "IQKeyboardManager (iOS)",
-          "https://github.com/tjvantoll/nativescript-IQKeyboardManager",
-          "Tame that wild beast  🐅  of a keyboard  ⌨️  by dropping in this library."
+        "nativescript-IQKeyboardManager",
+        "IQKeyboardManager (iOS)",
+        "https://github.com/tjvantoll/nativescript-IQKeyboardManager",
+        "Tame that wild beast  🐅  of a keyboard  ⌨️  by dropping in this library."
       ));
     }
 
     return new PluginInfoWrapper(
-        "Input is one of the hardest things on mobile to get right. Here are a few plugins that tackle problems you may encounter with your app.",
-        plugins
+      "Input is one of the hardest things on mobile to get right. Here are a few plugins that tackle problems you may encounter with your app.",
+      plugins
     );
   }
 }

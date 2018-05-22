@@ -26,27 +26,27 @@
 
 <StackLayout orientation="vertical">
     <Label text="Virement Vers un Compte Tharwa" class="texte"></Label>
-    <StackLayout  style="margin-top:32px">
- <RadDataForm  #myDataForm [source]="virementData">
+    <StackLayout style="margin-top:32px">
+        <RadDataForm #myDataForm [source]="virementData">
             <TKEntityProperty tkDataFormProperty name="numCompte" displayName="Numéro de Compte Tharwa" index="1" hint="e.g:THW0023DZD">
-                        <TKRegExValidator tkEntityPropertyValidators regEx="THW\d{6}DZD" errorMessage="Numéro de Compte Erroné"></TKRegExValidator>
-                        <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Le numéro de compte ne peut étre vide."></TKNonEmptyValidator>
-                    </TKEntityProperty>
-                <TKEntityProperty tkDataFormProperty name="montant" displayName="Montant en DZD" index="2" hint="DZD">
-                    <TKRangeValidator tkEntityPropertyValidators errorMessage="Le montant doit étre supérieur à 0 et inférieure à la balance" minimum="0" maximum="4000000"></TKRangeValidator>
-                    <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Le montant ne peut étre vide."></TKNonEmptyValidator>
-                    <TKPropertyEditor tkEntityPropertyEditor type="Number"></TKPropertyEditor>
+                <TKRegExValidator tkEntityPropertyValidators regEx="THW\d{6}DZD" errorMessage="Numéro de Compte Erroné"></TKRegExValidator>
+                <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Le numéro de compte ne peut étre vide."></TKNonEmptyValidator>
+            </TKEntityProperty>
+            <TKEntityProperty tkDataFormProperty name="montant" displayName="Montant en DZD" index="2" hint="DZD">
+                <TKRangeValidator tkEntityPropertyValidators errorMessage="Le montant doit étre supérieur à 0 et inférieure à la balance"
+                    minimum="0" maximum="4000000"></TKRangeValidator>
+                <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Le montant ne peut étre vide."></TKNonEmptyValidator>
+                <TKPropertyEditor tkEntityPropertyEditor type="Number"></TKPropertyEditor>
             </TKEntityProperty>
         </RadDataForm>
         <StackLayout orientation="vertical" class="card">
-                <Label text="Balance Totale" class="cardTitle"></Label>
-                <Label [text]="balance" class="cardTotal"></Label>
-                <Label text="Comission" class="cardTitle"></Label>
-                <Label [text]="comission" class="cardTotal"></Label>
-                <Label text="Balance Aprés Opération" class="cardTitle"></Label>
-                <Label [text]="liveBalance()" class="cardTotal"></Label>
+            <Label text="Balance Totale" class="cardTitle"></Label>
+            <Label [text]="balance" class="cardTotal"></Label>
+            <Label text="Comission" class="cardTitle"></Label>
+            <Label [text]="comission" class="cardTotal"></Label>
+            <Label text="Balance Aprés Opération" class="cardTitle"></Label>
+            <Label [text]="liveBalance()" class="cardTotal"></Label>
         </StackLayout>
         <Button class="next-button" text="Suivant" (tap)="Next()"></Button>
     </StackLayout>
 </StackLayout>
-

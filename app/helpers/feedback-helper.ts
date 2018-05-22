@@ -8,7 +8,7 @@ export class FeedbackHelper {
     this.feedback = new Feedback();
   }
 
-  showSuccess(title,message): void {
+  showSuccess(title, message): void {
     this.feedback.success({
       title: title,
       message: message,
@@ -20,7 +20,7 @@ export class FeedbackHelper {
     });
   }
 
-  showSuccessAltColors(title,message): void {
+  showSuccessAltColors(title, message): void {
     this.feedback.show({
       title: title,
       titleColor: new Color("black"),
@@ -35,7 +35,7 @@ export class FeedbackHelper {
     });
   }
 
-  showInfo(title,message): void {
+  showInfo(title, message): void {
     this.feedback.show({
       title: title,
       message: message,
@@ -47,7 +47,7 @@ export class FeedbackHelper {
     });
   }
 
-  showWarning(title,message): void {
+  showWarning(title, message): void {
     this.feedback.show({
       // title: "The warning title",
       message: message,
@@ -70,7 +70,7 @@ export class FeedbackHelper {
     });
   }
 
-  showCustomIcon(title,message): void {
+  showCustomIcon(title, message): void {
     this.feedback.show({
       title: title,
       message: message,
@@ -83,7 +83,7 @@ export class FeedbackHelper {
     });
   }
 
-  showError(title,message): void {
+  showError(title, message): void {
     this.feedback.show({
       title: title,
       message: message,
@@ -95,7 +95,7 @@ export class FeedbackHelper {
     });
   }
 
-  showErrorBottom(title,message): void {
+  showErrorBottom(title, message): void {
     this.feedback.show({
       title: title,
       message: message,
