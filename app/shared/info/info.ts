@@ -1,7 +1,7 @@
 
-import  {User} from "../user/user";
-export class Info{
-public user : User;
+import { User } from "../user/user";
+export class Info {
+    public user: User;
 
 }
 
