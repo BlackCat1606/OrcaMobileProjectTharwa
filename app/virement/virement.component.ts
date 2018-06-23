@@ -17,8 +17,6 @@ import { ListPicker } from "tns-core-modules/ui/list-picker/list-picker";
 import { RadDataFormComponent } from "nativescript-ui-dataform/angular";
 import { VirementData } from "./virementData";
 
-
-
 @Component({
   selector: "page-virement",
   moduleId: module.id,
@@ -175,7 +173,7 @@ export class VirementComponent extends AbstractMenuPageComponent {
   }
 
   Next() {
-    let isValid = true;
+   /* let isValid = true;
 
     let p1 = this.dataFormComp.dataForm.getPropertyByName("numCompte");
 
@@ -185,7 +183,7 @@ export class VirementComponent extends AbstractMenuPageComponent {
       isValid = false;
     } else {
       this.dataFormComp.dataForm.notifyValidated("numCompte", true);
-    }
+    }*/
 
     let hasErrors = this.dataFormComp.dataForm.hasValidationErrors();
     if (hasErrors) {
@@ -212,7 +210,10 @@ export class VirementComponent extends AbstractMenuPageComponent {
 
   liveBalance(i): String {
     ////////// Appelez un service de simulation BackEnd pour aboutir aux balances si le virement est effictué
-    return (this.balance - this._virementData.montant - 0.1 * this.balance).toString();
+    return (this.balance - this._virementData.montant - 0.1 * this._virementData.montant).toString();
+  }
+  getComission(): String {
+      return (this._virementData.montant * 0.1).toString();
   }
   protected getPluginInfo(): PluginInfoWrapper {
     return new PluginInfoWrapper(

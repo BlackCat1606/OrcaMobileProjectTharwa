@@ -1,7 +1,6 @@
 import { PreloadAllModules, Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { HomeComponent } from "~/home/home.component";
-import { VirementComponent } from "~/virement/virement.component";
 import { VirementMotifComponent } from "~/virement-motif/virement-motif.component";
 
 const APP_ROUTES: Routes = [
@@ -27,7 +26,7 @@ const APP_ROUTES: Routes = [
   },
   {
     path: "virement",
-    loadChildren: "./virement/virement.module#VirementModule"
+    loadChildren: "~/virement/virement.module#VirementModule"
   },
   {
     path: "virementMotif",
