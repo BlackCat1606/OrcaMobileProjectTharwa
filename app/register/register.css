@@ -1,0 +1,44 @@
+
+StackLayout {
+  padding-bottom: 15;
+  background-color: white;
+}
+
+Image {
+  margin-top: 90px;
+  margin-bottom: 40px;
+
+}
+
+  Button{
+    margin-left: 32;
+    margin-right: 32;
+    margin-top: 10;
+  }
+  TextField{
+    width: 85%;
+    margin-left: 32;
+    margin-right: 32;
+    margin-top: 10;
+    color:black;
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+    border-bottom-color: #FA9FAF;
+}
+
+  .next-button {
+    background-color: #ffffff;
+    border-color: #F64060;
+    border-radius: 54px;
+    border-style: solid;
+    border-width: 2px;
+    color: #F64060;
+    margin-top: 40;
+    width: 70%
+  }
+
+  .label-register{
+    margin-top: 10;
+    color: #F64060;
+    text-align: center;
+  }

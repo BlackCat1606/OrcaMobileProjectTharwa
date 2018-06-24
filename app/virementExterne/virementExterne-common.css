@@ -1,0 +1,18 @@
+ActionBar{
+  background-color: #F64060
+}
+
+.ActionBarTitle{
+  color: white;
+  font-family: Medium;
+  font-size: 20pt;
+}
+
+.next-button {
+  border-color: #F64060;
+  border-radius: 54px;
+  border-style: solid;
+  border-width: 2px;
+  color: #F64060;
+  width: 70%
+}

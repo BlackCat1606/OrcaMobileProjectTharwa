@@ -1,0 +1,24 @@
+<ActionBar title="Virement Interne" class="ActionBarTitle">
+
+    <NavigationButton text="Go Back" icon="res://ic_arrow_back"></NavigationButton>
+    <ActionItem ios.systemIcon="2" icon="res://ic_notifications" ios.position="right"></ActionItem>
+    <ActionItem ios.systemIcon="3" icon="res://ic_account" ios.position="right"></ActionItem>
+
+</ActionBar>
+
+<StackLayout orientation="vertical">
+    <Label text="Veuillez remplir le formulaire pour completer" class="texte"></Label>
+    <Label text="l'opération du virement." class="texte"></Label>
+
+    <StackLayout style="margin-top:32px">
+        <StackLayout>
+            <ListPicker [items]="accounts" selectedIndex="1" (selectedIndexChange)="selectedIndexChanged($event)" class="p-15"></ListPicker>
+        </StackLayout>
+
+        <Label [text]="balance" hint="Balance"></Label>
+        <TextField hint="Montant" [hint]="unit" keyboardType="number" [(ngModel)]="virement.montant"></TextField>
+        <Button class="next-button" text="Suivant" (tap)="Next()"></Button>
+    </StackLayout>
+
+</StackLayout>
+

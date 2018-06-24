@@ -1,0 +1,50 @@
+.page {
+  align-items: center;
+  flex-direction: column;
+}
+
+StackLayout {
+    padding-bottom: 15;
+    background-color:white;
+  }
+
+  Image {
+    margin-top: 90px;
+    margin-bottom: 80px;
+  }
+
+  Button {
+    margin-left: 32;
+    margin-right: 32;
+    margin-top: 10;
+  }
+  .text-login
+  {
+    width: 85%;
+    margin-left: 32;
+    margin-right: 32;
+    margin-top: 10;
+    color:black;
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+    border-bottom-color: #FA9FAF;
+  }
+  .submit-button {
+    background-color: #F64060;
+    border-radius: 54px;
+    color: white;
+    margin-top: 56;
+    width: 70%;
+  }
+
+
+  .label-login{
+    margin-top: 10;
+    color: #F64060;
+    text-align: center
+  }
+
+  .footer{
+    margin-top: 0px;
+    opacity: 0.1;
+  }

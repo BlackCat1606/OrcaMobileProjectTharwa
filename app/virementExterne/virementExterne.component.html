@@ -1,0 +1,42 @@
+<ActionBar title="Virement Externe" flat="true" class="ActionBarTitle">
+
+    <NavigationButton text="Go Back" icon="res://ic_arrow_back"></NavigationButton>
+    <ActionItem ios.systemIcon="2" icon="res://ic_notifications" ios.position="right"></ActionItem>
+    <ActionItem ios.systemIcon="3" icon="res://ic_account" ios.position="right"></ActionItem>
+
+</ActionBar>
+
+
+<GridLayout class="main-content">
+        <Gradient height="100%" direction="to right" colors="#dae2f8, #d6a4a4" class="p-20">
+            <ScrollView>
+          <GridLayout rows="auto, *">
+      
+            <StackLayout [@scale-in]="'in'" row="0" class="transparent-area">
+              <RadDataForm #myDataForm [source]="virementData">
+                    <TKEntityProperty tkDataFormProperty name="numCompte" displayName="Numéro de Compte Tharwa" index="1" hintText="e.g:THW0023DZD">
+                        <TKRegExValidator tkEntityPropertyValidators regEx="THW\d{6}DZD" errorMessage="Numéro de Compte Erroné"></TKRegExValidator>
+                        <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Le numéro de compte ne peut étre vide."></TKNonEmptyValidator>
+                    </TKEntityProperty>
+                    <TKEntityProperty tkDataFormProperty name="montant" displayName="Montant en DZD" index="2" hintText="DZD">
+                        <TKRangeValidator tkEntityPropertyValidators errorMessage="Le montant doit étre supérieur à 0 et inférieure à la balance"
+                            minimum="0" [maximum]="balance"></TKRangeValidator>
+                        <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Le montant ne peut étre vide."></TKNonEmptyValidator>
+                        <TKPropertyEditor tkEntityPropertyEditor type="Number"></TKPropertyEditor>
+                    </TKEntityProperty>
+                </RadDataForm>
+            </StackLayout>
+      
+            <StackLayout [@scale-in]="'in'" row="1" class="transparent-area m-t-20">
+                    <Label text="Balance Totale :" class="cardTitle"></Label>
+                    <Label [text]="balance" class="cardTotal"></Label>
+                    <Label text="Comission :" class="cardTitle"></Label>
+                    <Label [text]="getComission()" class="cardTotal"></Label>
+                    <Label text="Balance Aprés Opération :" class="cardTitle"></Label>
+                    <Label [text]="liveBalance()" class="cardTotal"></Label>
+                    <Button class="next-button" text="Suivant" (tap)="Next()"></Button>
+            </StackLayout>
+          </GridLayout>
+        </ScrollView>
+        </Gradient>
+      </GridLayout>

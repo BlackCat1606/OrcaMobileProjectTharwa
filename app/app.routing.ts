@@ -2,11 +2,26 @@ import { PreloadAllModules, Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { HomeComponent } from "~/home/home.component";
 import { VirementMotifComponent } from "~/virement-motif/virement-motif.component";
+import { Component } from "@angular/core";
+import { VirementExterneComponent } from "~/virementExterne/virementExterne.component";
+import { VirementExterneMotifComponent } from "~/virementExterne-motif/virement-motif.component";
+import { LoginComponent } from "~/login/login.component";
+import { RegisterComponent } from "~/register/register.component";
+import { Page2Component } from "~/rpage2/page2.component";
+import { VirementInterneMotifComponent } from "~/virementInterne-motif/virementInterne-motif.component";
 
 const APP_ROUTES: Routes = [
   {
     path: "",
-    component: HomeComponent
+    component: LoginComponent
+  },
+  {
+    path: "register",
+    component: RegisterComponent
+  },
+  {
+    path: "page2",
+    component: Page2Component
   },
   {
     path: "feedback",
@@ -31,6 +46,22 @@ const APP_ROUTES: Routes = [
   {
     path: "virementMotif",
     component: VirementMotifComponent
+  },
+  {
+    path: "virementExterne",
+    loadChildren: "~/virementExterne/virementExterne.module#VirementExterneModule"
+  },
+  {
+    path: "virementExterneMotif",
+    component: VirementExterneMotifComponent
+  },
+  {
+    path: "virementInterne",
+    loadChildren: "~/virementInterne/virementInterne.module#virementInterneModule"
+  },
+  {
+    path: "virementInterneMotif",
+    component: VirementInterneMotifComponent
   },
 ];
 

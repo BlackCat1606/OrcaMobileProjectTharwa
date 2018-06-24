@@ -21,6 +21,7 @@ import { View } from "tns-core-modules/ui/core/view";
 import { ad, layout } from "tns-core-modules/utils/utils";
 import { prompt, PromptResult } from "tns-core-modules/ui/dialogs";
 import { RadListViewComponent } from "nativescript-ui-listview/angular";
+import { tharwaAnimations } from "~/utils/animations";
 
 const firebase = require("nativescript-plugin-firebase/app");
 
@@ -38,50 +39,7 @@ interface City {
   moduleId: module.id,
   templateUrl: "./firebase.component.html",
   styleUrls: ["firebase-common.css"],
-  animations: [
-    trigger("from-bottom", [
-      state("in", style({
-        "opacity": 1,
-        transform: "translateY(0)"
-      })),
-      state("void", style({
-        "opacity": 0,
-        transform: "translateY(20%)"
-      })),
-      transition("void => *", [animate("1600ms 700ms ease-out")])
-    ]),
-    trigger("fade-in", [
-      state("in", style({
-        "opacity": 1
-      })),
-      state("void", style({
-        "opacity": 0
-      })),
-      transition("void => *", [animate("800ms 2000ms ease-out")])
-    ]),
-    trigger("scale-in", [
-      state("in", style({
-        "opacity": 1,
-        transform: "scale(1)"
-      })),
-      state("void", style({
-        "opacity": 0,
-        transform: "scale(0.9)"
-      })),
-      transition("void => *", [animate("1100ms ease-out")])
-    ]),
-    trigger("from-right", [
-      state("in", style({
-        "opacity": 1,
-        transform: "translate(0)"
-      })),
-      state("void", style({
-        "opacity": 0,
-        transform: "translate(20%)"
-      })),
-      transition("void => *", [animate("600ms 1500ms ease-out")])
-    ])
-  ]
+  animations: [tharwaAnimations]
 })
 export class FirebaseComponent extends AbstractMenuPageComponent implements OnInit {
   private static APP_SETTINGS_KEY_HAS_LOGGED_IN_WITH_GOOGLE = "HAS_LOGGED_IN_WITH_GOOGLE";

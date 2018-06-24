@@ -9,7 +9,6 @@ import * as camera from "nativescript-camera";
 import { isAndroid } from "tns-core-modules/platform";
 import * as fs from "file-system";
 import * as imageSource from "image-source";
-import { trigger, query, stagger, style, animate, transition, state } from "@angular/animations";
 import { FeedbackHelper } from "../helpers/feedback-helper";
 import { FancyalertHelper } from "../helpers/fancyalert-helper";
 import { LocalNotificationsHelper } from "../helpers/localnotifications-helper";
@@ -18,16 +17,15 @@ import { session, Session } from "nativescript-background-http";
 import { Subject } from "rxjs/Subject";
 import { tharwaAnimations } from '~/utils/animations';
 
-const TokenTest = "";
 @Component({
   moduleId: module.id,
-  selector: 'app-virement-motif',
-  templateUrl: './virement-motif.component.html',
+  selector: 'app-virementExterne-motif',
+  templateUrl: './virementExterne-motif.component.html',
   providers: [VirementService],
-  styleUrls: ['./virement-motif.css'],
+  styleUrls: ['./virementExterne-motif.css'],
   animations: [tharwaAnimations]
 })
-export class VirementMotifComponent implements OnInit {
+export class VirementExterneMotifComponent implements OnInit {
 
   virement: Virement;
   succe: string;
@@ -42,7 +40,6 @@ export class VirementMotifComponent implements OnInit {
   image: any;
   saved: any;
   private UploadSession: Session;
-  //////////////////////
   usedId: number = 0;
   fancyAlertHelper: FancyalertHelper;
   cfalertDialogHelper: CFAlertDialogHelper;
@@ -59,8 +56,6 @@ export class VirementMotifComponent implements OnInit {
     this.UploadSession = session('file-upload');
 
   }
-
-
 
   public goBack() {
     this.location.back();

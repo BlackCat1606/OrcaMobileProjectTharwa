@@ -1,5 +1,4 @@
-import { Component, ViewContainerRef, ViewChild } from "@angular/core";
-import { trigger, query, stagger, style, animate, transition, state } from "@angular/animations";
+import { Component, ViewContainerRef, ViewChild, OnInit } from "@angular/core";
 import { AbstractMenuPageComponent } from "../abstract-menu-page-component";
 import { FeedbackHelper } from "../helpers/feedback-helper";
 import { FancyalertHelper } from "../helpers/fancyalert-helper";
@@ -13,9 +12,8 @@ import { Compte } from "~/shared/compte/compte";
 import { UserService } from "~/shared/user/user.service";
 import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
 import { Config } from "~/shared/config";
-import { ListPicker } from "tns-core-modules/ui/list-picker/list-picker";
 import { RadDataFormComponent } from "nativescript-ui-dataform/angular";
-import { VirementData } from "./virementData";
+import { VirementData } from "./virementExterneData";
 import { tharwaAnimations } from "~/utils/animations";
 
 @Component({
@@ -27,7 +25,7 @@ import { tharwaAnimations } from "~/utils/animations";
   animations: [tharwaAnimations]
 
 })
-export class VirementComponent extends AbstractMenuPageComponent {
+export class VirementExterneComponent extends AbstractMenuPageComponent implements OnInit {
   fancyAlertHelper: FancyalertHelper;
   cfalertDialogHelper: CFAlertDialogHelper;
   feedbackHelper: FeedbackHelper;
@@ -108,20 +106,6 @@ export class VirementComponent extends AbstractMenuPageComponent {
         });
 
   }
-
-  selectedIndexChanged(args) {
-    let i = 0;
-    const picker = <ListPicker>args.object;
-    console.log("picker selection: " + picker.selectedIndex);
-
-    if (this.virement.emetteur === "0") {
-      i = picker.selectedIndex + 1;
-      this.virement.destinataire = i.toString();
-    } else {
-      this.virement.destinataire = "0";
-    }
-  }
-
   Next() {
    /* let isValid = true;
 
@@ -154,11 +138,11 @@ export class VirementComponent extends AbstractMenuPageComponent {
           "'justificatif'": this.justificatif
         }
       };
-      this.router.navigate(["/virementMotif"], navigationExtras);
+      this.router.navigate(["/virementExterneMotif"], navigationExtras);
     }
   }
 
-  liveBalance(i): String {
+  liveBalance(): String {
     ////////// Appelez un service de simulation BackEnd pour aboutir aux balances si le virement est effictué
     return (this.balance - this._virementData.montant - 0.1 * this._virementData.montant).toString();
   }
