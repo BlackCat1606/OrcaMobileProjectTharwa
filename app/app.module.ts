@@ -25,8 +25,8 @@ import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular";
 import { LoginComponent } from "~/login/login.component";
 import { RegisterComponent } from "~/register/register.component";
 import { Page2Component } from "~/rpage2/page2.component";
-import { VirementExterneMotifComponent } from "~/virementExterne-motif/virement-motif.component";
 import { VirementInterneMotifComponent } from "~/virementInterne-motif/virementInterne-motif.component";
+import { VirementExterneMotifComponent } from "~/virementExterne-motif/virementExterne-motif.component";
 
 
 const fs = require("file-system");

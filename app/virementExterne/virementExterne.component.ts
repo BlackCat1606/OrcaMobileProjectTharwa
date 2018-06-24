@@ -17,11 +17,11 @@ import { VirementData } from "./virementExterneData";
 import { tharwaAnimations } from "~/utils/animations";
 
 @Component({
-  selector: "page-virement",
+  selector: "virementExterne",
   moduleId: module.id,
   providers: [UserService],
-  templateUrl: "./virement.component.html",
-  styleUrls: ["virement-common.css"],
+  templateUrl: "./virementExterne.component.html",
+  styleUrls: ["virementExterne-common.css"],
   animations: [tharwaAnimations]
 
 })
