@@ -169,7 +169,7 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
             title: "Type Virement",
             message: "Veuillez choisir le type de virement à effectuer",
             cancelButtonText: "ANNULER",
-            actions: ["Virement vers un de mes comptes", "Virement Tharwa","Virement Externe"]
+            actions: ["Virement vers un de mes comptes", "Virement Tharwa", "Virement Externe"]
         }).then((result) => {
             let navigationExtras: NavigationExtras;
             if (result === "Virement vers un de mes comptes") {
