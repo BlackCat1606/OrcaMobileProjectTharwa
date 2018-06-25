@@ -1,5 +1,7 @@
 import { Component, ViewContainerRef, OnInit, AfterViewInit } from "@angular/core";
+import { animate, state, style, transition, trigger } from "@angular/animations";
 import { AbstractMenuPageComponent } from "../abstract-menu-page-component";
+import { Feedback } from "nativescript-feedback";
 import { ToastService } from "../services/toast.service";
 import { ToastHelper } from "../helpers/toast-helper";
 import { FeedbackHelper } from "../helpers/feedback-helper";
@@ -11,6 +13,7 @@ import { PluginInfo } from "../shared/plugin-info";
 import { PluginInfoWrapper } from "../shared/plugin-info-wrapper";
 import { CFAlertDialogHelper } from "../helpers/cfalertdialog-helper";
 import { Page, EventData, ContentView } from "ui/page";
+import { isAndroid, isIOS, device, screen } from "platform";
 import { UserService } from "../shared/user/user.service";
 import { User } from "../shared/user/user";
 import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
@@ -21,9 +24,12 @@ import * as dialogs from "ui/dialogs";
 import { Compte } from "../shared/compte/compte";
 import { CompteService } from "../shared/compte/compte.service";
 import { Config } from "../shared/config";
+import { registerElement } from "nativescript-angular/element-registry";
 import { NgZone } from "@angular/core";
+import { RouterExtensions } from "nativescript-angular/router";
 import { AppComponent } from "~/app.component";
 import { SocketIO } from "nativescript-socketio";
+import * as LocalNotifications from "nativescript-local-notifications";
 import { tharwaAnimations } from "~/utils/animations";
 import { CFAlertDialog } from "nativescript-cfalert-dialog";
 @Component({
@@ -59,6 +65,10 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
     cpt = 0;
     init = 0;
     myIndex;
+
+
+
+
     constructor(protected menuComponent: AppComponent,
         protected vcRef: ViewContainerRef,
         protected modalService: ModalDialogService,
@@ -92,8 +102,10 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
         });
         this.getTauxDechange('USD');
         this.getTauxDechange('EUR');
+        ////////////////////////////////
         let self = this;
         this.socketIO.on('notification', function (message) {
+            self.feedbackHelper.showInfo("Notification Tharwa", message);
             self.localNotificationsHelper.showWithSound("Notification Tharwa", message as string);
             self.getComptesInfo();
         });
@@ -165,7 +177,11 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
             title: "Type Virement",
             message: "Veuillez choisir le type de virement à effectuer",
             cancelButtonText: "ANNULER",
+<<<<<<< HEAD
             actions: ["Virement vers un de mes comptes", "Virement Tharwa", "Virement Externe"]
+=======
+            actions: ["Virement vers un de mes comptes", "Virement Externe"]
+>>>>>>> parent of 2f71185... itegration d'anciens composants 2
         }).then((result) => {
             let navigationExtras: NavigationExtras;
             if (result === "Virement vers un de mes comptes") {
@@ -176,9 +192,9 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
                         "'accountType'": accountType,
                     }
                 };
-                this.router.navigate(["/virementInterne"], navigationExtras);
+                this.router.navigate(["/virement"], navigationExtras);
             }
-            if (result === "Virement Tharwa") {
+            if (result === "Virement Externe") {
                 if (accountType === 0) {
                     this.virementInterne = false;
                     navigationExtras = {
@@ -192,21 +208,6 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
                     this.fancyAlertHelper.showWarning("Opération Non autorisée", "Vous pouvez faire un virement Externe a partir d'un compte Courant seulement");
                 }
             }
-            if (result === "Virement Externe") {
-                if (accountType === 0) {
-                    this.virementInterne = false;
-                    navigationExtras = {
-                        queryParams: {
-                            "'virementInterne'": this.virementInterne
-                        }
-                    };
-                    this.router.navigate(["/virementExterne"], navigationExtras);
-                }
-                else {
-                    this.fancyAlertHelper.showWarning("Opération Non autorisée", "Vous pouvez faire un virement Externe a partir d'un compte Courant seulement");
-                }
-            }
-
 
         });
     }

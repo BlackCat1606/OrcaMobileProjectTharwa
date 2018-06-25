@@ -19,7 +19,7 @@ import { tharwaAnimations } from '~/utils/animations';
 
 @Component({
   moduleId: module.id,
-  selector: 'virementExterne-motif',
+  selector: 'app-virementExterne-motif',
   templateUrl: './virementExterne-motif.component.html',
   providers: [VirementService],
   styleUrls: ['./virementExterne-motif.css'],

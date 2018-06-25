@@ -18,11 +18,11 @@ import { AbstractVirementComponent } from "~/utils/abstractVirement.component";
 import { VirementData } from "~/virementExterne/virementData";
 
 @Component({
-  selector: "virementExterne",
+  selector: "page-virement",
   moduleId: module.id,
   providers: [UserService],
-  templateUrl: "./virementExterne.component.html",
-  styleUrls: ["virementExterne-common.css"],
+  templateUrl: "./virement.component.html",
+  styleUrls: ["virement-common.css"],
   animations: [tharwaAnimations]
 
 })
