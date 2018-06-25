@@ -3,13 +3,13 @@
         <StackLayout >
             <Image src="res://login_logo" stretch="none" horizontalAlignment="center"></Image>
 
-            <TextField hint="Nom"  [(ngModel)]="user.firstname"></TextField>
+            <FloatLabel placeholder ="Nom" hint="Nom"  [(ngModel)]="user.firstname"></FloatLabel>
                             
-            <TextField hint="Prenom" [(ngModel)]="user.lastname"></TextField>
+            <FloatLabel placeholder="Prenom" hint="Prenom" [(ngModel)]="user.lastname"></FloatLabel>
 
-            <TextField hint="Adresse Email" keyboardType="email" [(ngModel)]="user.email"></TextField>
+            <FloatLabel placeholder= "Email" hint="Adresse Email" keyboardType="email" [(ngModel)]="user.email"></FloatLabel>
 
-            <TextField hint="Mot De Passe" secure="true" [(ngModel)]="user.password"></TextField>
+            <FloatLabel placeholder = "Mot de passe" hint="Mot De Passe" secure="true" [(ngModel)]="user.password"></FloatLabel>
                         
             <Button class="next-button" text="Suivant" (tap)="goSuivant()"></Button>
 

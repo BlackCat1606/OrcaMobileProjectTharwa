@@ -40,13 +40,7 @@ export class HistoriqueComponent extends AbstractMenuPageComponent implements On
     @ViewChild('scrollView') scrollView: ElementRef;
 
     virements: Array<Virement> = [];
-    cfalertDialog: CFAlertDialog;
-    fancyAlertHelper: FancyalertHelper;
-    cfalertDialogHelper: CFAlertDialogHelper;
-    feedbackHelper: FeedbackHelper;
-    localNotificationsHelper: LocalNotificationsHelper = new LocalNotificationsHelper();
-    snackbarHelper: SnackbarHelper;
-    toastHelper: ToastHelper;
+
     isLoading = false;
     cpt = 0;
     user: User;
@@ -70,10 +64,6 @@ export class HistoriqueComponent extends AbstractMenuPageComponent implements On
         protected modalService: ModalDialogService,
         protected routerExtensions: RouterExtensions) {
         super(appComponent, vcRef, modalService);
-        this.fancyAlertHelper = new FancyalertHelper();
-        this.cfalertDialog = new CFAlertDialog();
-        this.cfalertDialogHelper = new CFAlertDialogHelper();
-        this.feedbackHelper = new FeedbackHelper();
         this.historicalArray = [];
     }
 
@@ -189,7 +179,10 @@ export class HistoriqueComponent extends AbstractMenuPageComponent implements On
                         }
                         i++;
                     }
-                });
+                },
+            (error) => {
+                this.feedbackHelper.showError("Erreur de chargement de donées", error["message"]);
+            });
     }
     protected getPluginInfo(): PluginInfoWrapper {
         return new PluginInfoWrapper(

@@ -4,6 +4,9 @@ import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
 import { VirementService } from "../shared/virement/virement.service";
 import { Config } from '../shared/config';
 import * as dialogs from "ui/dialogs";
+import { FancyalertHelper } from '~/helpers/fancyalert-helper';
+import { CFAlertDialogHelper } from '~/helpers/cfalertdialog-helper';
+import { FeedbackHelper } from '~/helpers/feedback-helper';
 
 @Component({
   moduleId: module.id,
@@ -25,8 +28,16 @@ export class VirementInterneMotifComponent implements OnInit {
   public type: string;
   path: any;
   image: any;
+  feedbackHelper: FeedbackHelper;
+  fancyAlertHelper: FancyalertHelper;
+  cfalertDialogHelper: CFAlertDialogHelper;
+
   saved: any;
-  constructor(private router: Router, private route: ActivatedRoute, private virementService: VirementService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private virementService: VirementService) {
+    this.fancyAlertHelper = new FancyalertHelper();
+    this.cfalertDialogHelper = new CFAlertDialogHelper();
+    this.feedbackHelper = new FeedbackHelper();
+  }
 
   ngOnInit() {
     this.virement = new Virement();
@@ -69,7 +80,7 @@ export class VirementInterneMotifComponent implements OnInit {
                 this.gererMessages(error["status"]);
               });
         } else {
-          alert("Veuillez Saisir le motif");
+          this.feedbackHelper.showError("Motif manquant", "Veuillez Saisir le motif");
         }
       }
       else {
@@ -82,15 +93,15 @@ export class VirementInterneMotifComponent implements OnInit {
 
   gererMessages(code) {
     switch (code) {
-      case 200: alert("Virement effectué avec succés!");
+      case 200: this.fancyAlertHelper.showSuccess("Opération Réussite !", "Virement effectué avec succés!");
         break;
-      case 401: alert("Utilisateur non autorisé à faire un virement !");
+      case 401: this.fancyAlertHelper.showError("Opération Interdite !", "Utilisateur non autorisé à faire un virement !");
         break;
-      case 404: alert("Service introuvable !");
+      case 404:  this.fancyAlertHelper.showError("Service introuvable !", "Le service est introuvable");
         break;
-      case 403: alert("Balance insuffisante!");
+      case 403: this.fancyAlertHelper.showError("Balance insuffisante !", "Votre Balance est insuffisante!");
         break;
-      case 500: alert("Erreur serveur");
+      case 500: this.fancyAlertHelper.showError("Erreur serveur !", "Veuillez Réessayer SVP");
         break;
     }
   }

@@ -1,0 +1,4 @@
+<GridLayout rows="30, auto" marginBottom="5">
+    <Label #label row="1" [text]="placeholder" opacity="0.4" fontSize="14"  class="input"></Label>
+    <TextField #textField [secure]="secure" row="1"  (focus)="onFocus()" (blur)="onBlur()" borderBottomWidth="3px" borderBottomColor="#FA9FAF" padding="2"></TextField>
+</GridLayout>

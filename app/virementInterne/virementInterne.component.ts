@@ -5,15 +5,20 @@ import { ListPicker } from "ui/list-picker";
 import { UserService } from '../shared/user/user.service';
 import { Config } from '../shared/config';
 import { Compte } from '../shared/compte/compte';
+import { AbstractVirementComponent } from '~/utils/abstractVirement.component';
+import { unit1, unit2, unit3 } from '~/utils/units';
+import { color1, colorGrise, color2, color3, color4 } from '~/utils/accountsColors';
+import { tharwaAnimations } from '~/utils/animations';
 
 @Component({
   moduleId: module.id,
   selector: 'virementInterne',
   providers: [UserService],
   templateUrl: './virementInterne.component.html',
-  styleUrls: ['./virementInterne.css']
+  styleUrls: ['./virementInterne.css'],
+  animations: [tharwaAnimations]
 })
-export class VirementInterneComponent implements OnInit {
+export class VirementInterneComponent extends AbstractVirementComponent implements OnInit {
 
   virement: Virement;
   typeVirement: String;
@@ -30,17 +35,17 @@ export class VirementInterneComponent implements OnInit {
   balance: String;
   comptes: Array<any>;
   balanceAfter: number;
-
+  comissionChiffre: number;
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private userService: UserService) {
-    this.comptes = [];
+    protected router: Router,
+    protected route: ActivatedRoute,
+    protected userService: UserService) {
+    super(router, route, userService);
   }
 
   ngOnInit() {
     this.virement = new Virement();
-
+    this.comission = "";
     this.route.queryParams.subscribe((params) => {
       this.virementInterne = params["'virementInterne'"];
       this.virement.emetteur = params["'accountType'"];
@@ -70,7 +75,7 @@ export class VirementInterneComponent implements OnInit {
 
 
   }
-  getComptesInfo() {
+  getComptesInfo = () => {
     this.userService.getInfo(Config.access_token)
       .subscribe(
         (res) => {
@@ -153,26 +158,26 @@ export class VirementInterneComponent implements OnInit {
 
         }
         else {
-          alert("Opération non autorisée! Montant dépasse la balance");
+          this.feedbackHelper.showError("Opération non autorisée!", "Le Montant dépasse la balance");
         }
       }
       else {
-        alert("Montant doit étre supérieur à 0 !");
+        this.feedbackHelper.showError("Montant incorrect", "Montant doit étre supérieur à 0 !");
       }
     } else {
-      alert("Veuillez remplir tous les champs");
+      this.feedbackHelper.showError("Champs manquants", "Veuillez remplir tous les champs");
     }
   }
   setUnit() {
     switch (this.virement.emetteur) {
 
-      case "0": this.unit = "DZD";
+      case "0": this.unit = unit1;
         break;
-      case "1": this.unit = "DZD";
+      case "1": this.unit = unit1;
         break;
-      case "2": this.unit = "EUR";
+      case "2": this.unit = unit2;
         break;
-      case "3": this.unit = "USD";
+      case "3": this.unit = unit3;
         break;
 
     }
@@ -180,56 +185,76 @@ export class VirementInterneComponent implements OnInit {
   getAccountStyle(i): String {
     if (i === 0) {
       if (this.myAccount.etat === "0") {
-        return "#cec6c6";
+        return colorGrise;
       }
       else {
 
 
         if (this.myAccount.type === 0) {
-          return "#900c3f";
+          return color1;
 
         }
         else if (this.myAccount.type === 1) {
-          return "#c70039";
+          return color2;
         }
         else if (this.myAccount.type === 2) {
-          return "#e29e9e";
+          return color3;
         }
         else if (this.myAccount.type === 3) {
-          return "#D19B76";
+          return color4;
         }
       }
     }
     else {
       if (this.myAccountDest.etat === "0") {
-        return "#cec6c6";
+        return colorGrise;
       }
       else {
 
 
         if (this.myAccountDest.type === 0) {
-          return "#900c3f";
+          return color1;
 
         }
         else if (this.myAccountDest.type === 1) {
-          return "#c70039";
+          return color2;
         }
         else if (this.myAccountDest.type === 2) {
-          return "#e29e9e";
+          return color3;
         }
         else if (this.myAccountDest.type === 3) {
-          return "#D19B76";
+          return color4;
         }
       }
     }
   }
   liveBalance(i): String {
     if (i === 0) {
+      let bal: number = Number.parseFloat(this.myAccount.balance);
       ////////////////////////// Appelez un service de simulation BackEnd pour aboutir aux balances si le virement est effictué
-      return (this.virement.montant + (-this.myAccount.balance)).toString();
+      return (this.virement.montant + (-this.myAccount.balance) - (  bal * this.comissionChiffre)).toString();
     } else {
       return (this.virement.montant + (this.myAccountDest.balance)).toString();
     }
   }
+  getComission(): String {
+     if (this.myAccount.type === 0 && this.myAccountDest.type === 1) {
+       this.comission = "0 %" ;
+        this.comissionChiffre = 0;
+     }
+     else if (this.myAccount.type === 1 && this.myAccountDest.type === 0 ) {
+        this.comission = "0.10 %";
+        this.comissionChiffre = 0.0001;
+     }
+     else if ((this.myAccount.type === 2 || this.myAccount.type === 3) && this.myAccountDest.type === 0 ) {
+      this.comission = "1.5 %";
+      this.comissionChiffre = 0.015;
+     }
+     else if ((this.myAccountDest.type === 2 || this.myAccountDest.type === 3) && this.myAccount.type === 0 ) {
+      this.comission = "2 %";
+      this.comissionChiffre = 0.02;
+     }
+     return this.comission;
+    }
 
 }

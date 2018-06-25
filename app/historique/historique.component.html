@@ -1,10 +1,13 @@
-<ActionBar title="Historique" class="ActionBarTitle">
-    
-    <NavigationButton text="Go Back" icon="res://ic_arrow_back"></NavigationButton>
-    <ActionItem ios.systemIcon="2" icon="res://ic_notifications" ios.position="right"></ActionItem>
-    <ActionItem ios.systemIcon="3" icon="res://ic_account" ios.position="right"></ActionItem>
-
-</ActionBar>
+ <ActionBar title="Historique" flat="true">
+    <ActionItem ios.position="left" (tap)="toggleTheMenu()" *ngIf="isIOS">
+      <Label class="mdi-actionitem mdi-menu" [text]="'mdi-hamburger' | fonticon"></Label>
+    </ActionItem>
+    <Label horizontalAlignment="left" class="mdi-actionitem mdi-menu" 
+    [text]="'mdi-hamburger' | fonticon" (tap)="toggleTheMenu()" *ngIf="!isIOS"></Label>
+    <Label horizontalAlignment="center" class="semibold" text="Acceuil" *ngIf="isIOS"></Label>
+    <ActionItem ios.systemIcon="2" icon="res://ic_notifications" ios.position="right" (tap)="goProfile()"></ActionItem>
+    <ActionItem ios.systemIcon="3" icon="res://ic_account" ios.position="right" (tap)="goProfile()"></ActionItem>
+  </ActionBar>
 
     <GridLayout class="page page-content" tkMainContent>
         <ListView [items]="historicalArray">

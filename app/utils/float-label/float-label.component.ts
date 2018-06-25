@@ -4,12 +4,8 @@ import { Color } from "tns-core-modules/color";
 @Component({
     selector: "FloatLabel",
     moduleId: module.id,
-    template: `
-        <GridLayout rows="30, auto" marginBottom="5">
-            <Label #label row="1" [text]="placeholder" opacity="0.4" fontSize="14"  class="input"></Label>
-            <TextField #textField [secure]="secure" row="1"  (focus)="onFocus()" (blur)="onBlur()" borderBottomWidth="3" borderBottomColor="#cec8c8" padding="2"></TextField>
-        </GridLayout>
-    `
+    templateUrl: "./float-label.html",
+    styleUrls: ["./float-label.css"]
 })
 export class FloatLabel {
     @Input() placeholder: string;
@@ -34,7 +30,7 @@ export class FloatLabel {
         }).then(() => { }, () => { });
 
         // set the border bottom color to green to indicate focus
-        textField.borderBottomColor = new Color('#00b47e');
+        textField.borderBottomColor = new Color('#FA9FAF');
     }
 
     onBlur() {
@@ -49,6 +45,6 @@ export class FloatLabel {
             }).then(() => { }, () => { });
         }
         // reset border bottom color.
-        textField.borderBottomColor = new Color('#cec8c8');
+        textField.borderBottomColor = new Color('#FA9FAF');
     }
 }

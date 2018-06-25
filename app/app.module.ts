@@ -23,10 +23,10 @@ import { isAndroid } from "tns-core-modules/platform/platform";
 import { TimeFromNow } from "./timeFromNow.pipe";
 import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular";
 import { LoginComponent } from "~/login/login.component";
-import { RegisterComponent } from "~/register/register.component";
 import { Page2Component } from "~/rpage2/page2.component";
 import { VirementInterneMotifComponent } from "~/virementInterne-motif/virementInterne-motif.component";
 import { VirementExterneMotifComponent } from "~/virementExterne-motif/virementExterne-motif.component";
+import { FloatLabel } from "~/utils/float-label/float-label.component";
 
 
 const fs = require("file-system");
@@ -63,16 +63,13 @@ Config.isTablet = device.deviceType === DeviceType.Tablet;
     AppComponent,
     HomeComponent,
     TimeFromNow,
-    LoginComponent,
-    RegisterComponent,
-    Page2Component,
     VirementExterneMotifComponent,
     VirementInterneMotifComponent,
     VirementMotifComponent,
     InfoModalComponent
   ],
   entryComponents: [
-    InfoModalComponent
+    InfoModalComponent,
   ],
   providers: [
     ToastService

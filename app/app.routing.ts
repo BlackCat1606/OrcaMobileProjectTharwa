@@ -14,15 +14,15 @@ import { CodeComponent } from "~/code/code.component";
 const APP_ROUTES: Routes = [
   {
     path: "",
-    component: LoginComponent
+    loadChildren: "./login/login.module#LoginModule"
   },
   {
     path: "register",
-    component: RegisterComponent
+    loadChildren: "./register/register.module#RegisterModule"
   },
   {
     path: "page2",
-    component: Page2Component
+    loadChildren: "./rpage2/page2.module#Page2Module"
   },
   {
     path: "feedback",
@@ -67,6 +67,10 @@ const APP_ROUTES: Routes = [
   {
     path: "historique",
     loadChildren: "~/historique/historique.module#HistoriqueModule"
+  },
+  {
+    path: "notification",
+    loadChildren: "~/notification/notification.module#NotificationModule"
   },
   {
     path: "code",

@@ -46,6 +46,9 @@ export class VirementExterneMotifComponent implements OnInit {
   feedbackHelper: FeedbackHelper;
   localNotificationsHelper: LocalNotificationsHelper;
   pictureTaken: boolean = false;
+  private nomDest: string;
+  private prenomDest: string;
+  private banqueDest: string;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private virementService: VirementService, private location: Location) {
@@ -63,6 +66,9 @@ export class VirementExterneMotifComponent implements OnInit {
   ngOnInit() {
     this.virement = new Virement();
     this.route.queryParams.subscribe((params) => {
+      this.nomDest = params["'nomDestinataire'"];
+      this.prenomDest = params["'prenomDestinataire'"];
+      this.banqueDest = params["'banqueDestinataire'"];
       this.virement.destinataire = params["'destinataire'"];
       this.virement.montant = params["'montant'"];
       this.justificatif = params["'justificatif'"];
@@ -121,7 +127,7 @@ export class VirementExterneMotifComponent implements OnInit {
           },
           complete: () => {
             console.log("complete");
-            this.fancyAlertHelper.showSuccess("Virement vers un compte Tharwa", "Virement Effectué avec Succés");
+            this.fancyAlertHelper.showSuccess("Virement Externe", "Virement Effectué avec Succés");
             this.router.navigate(["acceuil"]);
 
           }
@@ -136,11 +142,11 @@ export class VirementExterneMotifComponent implements OnInit {
             },
             error: (e) => {
               console.log(JSON.stringify(e));
-              this.gererMessages(e);
+              this.gererMessages(e["status"]);
             },
             complete: () => {
               console.log("complete");
-              this.fancyAlertHelper.showSuccess("Virement Tharwa", "Virement Effectué avec Succés");
+              this.fancyAlertHelper.showSuccess("Virement Externe", "Virement Effectué avec Succés");
             }
           });
       }
@@ -176,9 +182,10 @@ export class VirementExterneMotifComponent implements OnInit {
     };
 
     let params = [
-      { name: "Montant", value: this.virement.montant },
-      { name: "CompteDestinataire", value: this.virement.destinataire },
-      { name: "Motif", value: this.virement.motif },
+      { name: "nomDestinataire", value: this.nomDest + " " + this.prenomDest },
+      { name: "montant", value: this.virement.montant },
+      { name: "numCompteDestinataire", value: this.virement.destinataire },
+      { name: "motif", value: this.virement.motif },
       { name: "avatar", filename: fileUri, mimeType: "jpg" }];
     console.log(JSON.stringify(params));
     let subject = new Subject<any>();

@@ -35,11 +35,6 @@ import { CFAlertDialog } from "nativescript-cfalert-dialog";
     animations: [tharwaAnimations]
 })
 export class AcceuilComponent extends AbstractMenuPageComponent implements OnInit, AfterViewInit {
-    fancyAlertHelper: FancyalertHelper;
-    cfalertDialogHelper: CFAlertDialogHelper;
-    feedbackHelper: FeedbackHelper;
-    localNotificationsHelper: LocalNotificationsHelper = new LocalNotificationsHelper();
-    snackbarHelper: SnackbarHelper;
     toastHelper: ToastHelper;
     Dollar: String;
     Euro: String;
@@ -84,7 +79,6 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
         this.snackbarHelper = new SnackbarHelper();
         this.toastHelper = new ToastHelper(this.toastService);
         this.myIndex = 3;
-
     }
     ngOnInit(): void {
 
@@ -135,8 +129,6 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
                             }) + " USD";
                                 break;
                         }
-
-
                         console.log(this.compte.numCompte);
                         console.log(this.compte.balance);
                         console.log(this.compte.etat);

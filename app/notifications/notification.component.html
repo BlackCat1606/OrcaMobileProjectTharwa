@@ -1,0 +1,59 @@
+ <ActionBar title="Notifications" flat="true">
+    <ActionItem ios.position="left" (tap)="toggleTheMenu()" *ngIf="isIOS">
+      <Label class="mdi-actionitem mdi-menu" [text]="'mdi-hamburger' | fonticon"></Label>
+    </ActionItem>
+    <Label horizontalAlignment="left" class="mdi-actionitem mdi-menu" 
+    [text]="'mdi-hamburger' | fonticon" (tap)="toggleTheMenu()" *ngIf="!isIOS"></Label>
+    <Label horizontalAlignment="center" class="semibold" text="Notifications" *ngIf="isIOS"></Label>
+    <ActionItem ios.systemIcon="3" icon="res://ic_account" ios.position="right" (tap)="goProfile()"></ActionItem>
+  </ActionBar>
+
+  <!--  <GridLayout class="page page-content" tkMainContent>
+        <ListView [items]="notificationArray">
+            <ng-template let-item="item" let-i="index">
+                <StackLayout orientation="horizontal" class="list-item">
+                    <Image [src]="item.avatar" stretch="none" horizontalAlignment="center"></Image>
+                    <StackLayout orientation="vertical">
+                        <Label [text] = "item.evenement" class="list-label"></Label>
+                        <StackLayout orientation="horizontal" class="list-cost" >
+                            <Label [text] = "item.montant"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout orientation="vertical" class="list-date">
+                    </StackLayout>
+                </StackLayout>
+            </ng-template>
+        </ListView>
+    </GridLayout>-->
+<GridLayout rows="auto, auto, *" [@scale-in]="'in'" row="1" class="transparent-area m-t-20">
+            <Label row="0" class="section-title" text="Vos Notifications"></Label>
+    
+            <RadListView #notificationsListView row="2" [items]="notificationArray" (itemLoading)="onItemLoading($event)" selectionBehavior="None" swipeActions="true"
+              (itemSwipeProgressEnded)="onSwipeCellFinished($event)" (itemSwipeProgressStarted)="onSwipeCellStarted($event)" (itemSwipeProgressChanged)="onCellSwiping($event)"
+              class="m-t-10" style="border-radius: 5; background-color: transparent">
+    
+              <!-- rows template -->
+              <ng-template tkListItemTemplate let-item="item">
+                    <StackLayout orientation="horizontal" class="list-item">
+                            <Image [src]="item.avatar" stretch="none" horizontalAlignment="center"></Image>
+                            <StackLayout orientation="vertical">
+                                <Label [text] = "item.evenement" class="list-label"></Label>
+                                <StackLayout orientation="horizontal" class="list-cost" >
+                                    <Label [text] = "item.montant"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout orientation="vertical" class="list-date">
+                            </StackLayout>
+                        </StackLayout>
+              </ng-template>
+    
+              <!-- swipe actions template -->
+              <GridLayout *tkListItemSwipeTemplate columns="auto, *, auto">
+                <GridLayout columns="*" col="0" id="right-stack">
+                  <GridLayout col="0" class="bg-danger" (tap)="onRightSwipeClick($event)" id="btnDelete">
+                    <Label text="delete" verticalAlignment="center" horizontalAlignment="center"></Label>
+                  </GridLayout>
+                </GridLayout>
+              </GridLayout>
+            </RadListView>
+</GridLayout>

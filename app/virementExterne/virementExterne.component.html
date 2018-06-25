@@ -14,8 +14,18 @@
       
             <StackLayout [@scale-in]="'in'" row="0" class="transparent-area">
               <RadDataForm #myDataForm [source]="virementData">
+                    <TKEntityProperty tkDataFormProperty name="nom" displayName="Nom" index="1" hintText="le Nom du destinataire">
+                            <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Le Nom ne peut pas étre vide."></TKNonEmptyValidator>
+                        </TKEntityProperty>
+                        <TKEntityProperty tkDataFormProperty name="prenom" displayName="Prenom" index="2" hintText="Le prenom du destinataire">
+                                <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Le prenom ne peut étre vide."></TKNonEmptyValidator>
+                            </TKEntityProperty>
+                            <TKEntityProperty tkDataFormProperty name="banque" displayName="Banque" index="3" hintText="e.g:THW0023DZD">
+                                    <TKRegExValidator tkEntityPropertyValidators regEx="THW\d{6}DZD" errorMessage="Numéro de Compte Erroné"></TKRegExValidator>
+                                    <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Le numéro de compte ne peut étre vide."></TKNonEmptyValidator>
+                                </TKEntityProperty>
                     <TKEntityProperty tkDataFormProperty name="numCompte" displayName="Numéro de Compte Tharwa" index="1" hintText="e.g:THW0023DZD">
-                        <TKRegExValidator tkEntityPropertyValidators regEx="THW\d{6}DZD" errorMessage="Numéro de Compte Erroné"></TKRegExValidator>
+                        <TKRegExValidator tkEntityPropertyValidators regEx="^[a-zA-Z]{3}\d{6}DZD" errorMessage="Numéro de Compte Erroné"></TKRegExValidator>
                         <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Le numéro de compte ne peut étre vide."></TKNonEmptyValidator>
                     </TKEntityProperty>
                     <TKEntityProperty tkDataFormProperty name="montant" displayName="Montant en DZD" index="2" hintText="DZD">
@@ -29,11 +39,9 @@
       
             <StackLayout [@scale-in]="'in'" row="1" class="transparent-area m-t-20">
                     <Label text="Balance Totale :" class="cardTitle"></Label>
-                    <Label [text]="balance" class="cardTotal"></Label>
+                    <Label [text]="liveBalance()" class="cardTotal"></Label>
                     <Label text="Comission :" class="cardTitle"></Label>
                     <Label [text]="getComission()" class="cardTotal"></Label>
-                    <Label text="Balance Aprés Opération :" class="cardTitle"></Label>
-                    <Label [text]="liveBalance()" class="cardTotal"></Label>
                     <Button class="next-button" text="Suivant" (tap)="Next()"></Button>
             </StackLayout>
           </GridLayout>

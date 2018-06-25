@@ -18,6 +18,7 @@ import { SocketIO } from "nativescript-socketio";
 @Component({
   selector: "login",
   templateUrl: "./login.html",
+  moduleId: module.id,
   providers: [UserService],
   styleUrls: ["./login-common.css", "./login.css"],
   animations: [tharwaAnimations]
@@ -106,16 +107,7 @@ register() {
   }
 /// Gérer les messages d'erreurs du Serveur
 gererMessages(error) {
-    switch (error.code) {
-      case 200: this.fancyAlertHelper.showSuccess("Connexion Réussite", "Bienvenu a Tharwa");
-        break;
-      case 400: this.fancyAlertHelper.showError("Erreur d'authentification !", error.message );
-        break;
-      case 404: this.fancyAlertHelper.showError("Utilisateur non trouvé !", error.message);
-        break;
-      case 500: this.fancyAlertHelper.showError("Erreur Serveur ", error.message);
-        break;
-    }
+    this.fancyAlertHelper.showError("Erreur d'authentification !", error );
   }
 /// choisir le type de validation d'authentification et faire la requéte
 submit(): void {
@@ -149,6 +141,8 @@ submit(): void {
               this.choice = "1";
               this.viaSMS = true;
               this.toNextPage();
+            } else {
+              this.feedbackHelper.showError("Choix Obligatoire", "Veuillez choisir une option de validation");
             }
           }
         },

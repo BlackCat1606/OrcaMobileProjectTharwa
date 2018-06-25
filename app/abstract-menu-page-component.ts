@@ -5,14 +5,32 @@ import { InfoModalComponent } from "./info-modal/info-modal";
 import { PluginInfoWrapper } from "./shared/plugin-info-wrapper";
 import { Config } from "./shared/config";
 import { AppComponent } from "~/app.component";
+import { CFAlertDialog } from "nativescript-cfalert-dialog";
+import { FancyalertHelper } from "~/helpers/fancyalert-helper";
+import { CFAlertDialogHelper } from "~/helpers/cfalertdialog-helper";
+import { FeedbackHelper } from "~/helpers/feedback-helper";
+import { LocalNotificationsHelper } from "~/helpers/localnotifications-helper";
+import { SnackbarHelper } from "~/helpers/snackbar-helper";
+import { ToastHelper } from "~/helpers/toast-helper";
 
 export abstract class AbstractMenuPageComponent {
+  cfalertDialog: CFAlertDialog;
+  fancyAlertHelper: FancyalertHelper;
+  cfalertDialogHelper: CFAlertDialogHelper;
+  feedbackHelper: FeedbackHelper;
+  localNotificationsHelper: LocalNotificationsHelper = new LocalNotificationsHelper();
+  snackbarHelper: SnackbarHelper;
+  toastHelper: ToastHelper;
   isIOS: boolean = isIOS;
   isTablet: boolean = Config.isTablet;
 
   constructor(protected appComponent: AppComponent,
     protected vcRef: ViewContainerRef,
     protected modalService: ModalDialogService) {
+      this.fancyAlertHelper = new FancyalertHelper();
+      this.cfalertDialog = new CFAlertDialog();
+      this.cfalertDialogHelper = new CFAlertDialogHelper();
+      this.feedbackHelper = new FeedbackHelper();
   }
 
   protected abstract getPluginInfo(): PluginInfoWrapper;

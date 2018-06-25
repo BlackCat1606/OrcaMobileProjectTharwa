@@ -9,7 +9,7 @@ import { FeedbackHelper } from "~/helpers/feedback-helper";
 @Component
     ({
         moduleId: module.id,
-        selector: "ns-register",
+        selector: "register",
         providers: [UserService],
         templateUrl: "./register.component.html",
         styleUrls: ["./register.css"],

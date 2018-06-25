@@ -13,8 +13,9 @@ import { UserService } from "~/shared/user/user.service";
 import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
 import { Config } from "~/shared/config";
 import { RadDataFormComponent } from "nativescript-ui-dataform/angular";
-import { VirementData } from "./virementExterneData";
+import { VirementData } from "../utils/VirementData";
 import { tharwaAnimations } from "~/utils/animations";
+import { AbstractVirementComponent } from "~/utils/abstractVirement.component";
 
 @Component({
   selector: "virementExterne",
@@ -25,86 +26,23 @@ import { tharwaAnimations } from "~/utils/animations";
   animations: [tharwaAnimations]
 
 })
-export class VirementExterneComponent extends AbstractMenuPageComponent implements OnInit {
-  fancyAlertHelper: FancyalertHelper;
-  cfalertDialogHelper: CFAlertDialogHelper;
-  feedbackHelper: FeedbackHelper;
-  virement: Virement;
-  typeVirement: String;
-  virementInterne: boolean;
-  comission;
-  compte: Compte;
-  justificatif;
-  unit;
-  numCompteExterne;
-  balance;
-  comptes: Array<any>; balanceAfter: number;
-  monNumCompte;
+export class VirementExterneComponent extends AbstractVirementComponent implements OnInit {
 
-
-  get virementData(): VirementData {
-    return this._virementData;
-  }
-  private _virementData: VirementData;
   @ViewChild("myDataForm") dataFormComp: RadDataFormComponent;
 
-  constructor(protected appComponent: AppComponent,
-    protected vcRef: ViewContainerRef,
-    protected modalService: ModalDialogService,
-    private router: Router, private route: ActivatedRoute,
-    private userService: UserService) {
+  constructor(
+    protected router: Router,
+    protected route: ActivatedRoute,
+    protected userService: UserService) {
 
-    super(appComponent, vcRef, modalService);
-    this.fancyAlertHelper = new FancyalertHelper();
-    this.cfalertDialogHelper = new CFAlertDialogHelper();
-    this.feedbackHelper = new FeedbackHelper();
-    this.comptes = [];
+    super(router, route , userService );
+    this._virementData = new VirementData();
   }
 
   ngOnInit() {
     this.virement = new Virement();
-    this._virementData = new VirementData();
     this.getComptesInfo();
-    this.comission = "1%";
-  }
-
-
-
-  getComptesInfo = () => {
-    this.userService.getInfo(Config.access_token)
-      .subscribe(
-        (res) => {
-          res = res.json();
-          let i = 0;
-          while (res["comptes"][i] != null) {
-            this.compte = new Compte();
-            this.compte.numCompte = res["comptes"][i]["Num"];
-            this.compte.etat = res["comptes"][i]["Etat"];
-            this.compte.balance = res["comptes"][i]["Balance"];
-            this.compte.type = res["comptes"][i]["TypeCompte"];
-            console.log(this.compte.numCompte);
-            console.log(this.compte.balance);
-            console.log(this.compte.etat);
-            this.comptes.push(this.compte);
-            if (i === 0) {
-
-              this.balance = new String();
-              this.balance = res["comptes"][i]["Balance"];
-              this.monNumCompte = res["comptes"][i]["Num"];
-              console.log("Votre balance" + this.balance);
-            }
-            console.log(res["comptes"][i]["TypeCompte"]);
-            i++;
-          }
-
-
-        },
-        (error) => {
-
-          this.feedbackHelper.showError("Erreur", "Chargement de donnée échoué");
-          console.log("virement erreur getInfo: " + error);
-        });
-
+    this.comission = "2%";
   }
   Next() {
    /* let isValid = true;
@@ -133,6 +71,9 @@ export class VirementExterneComponent extends AbstractMenuPageComponent implemen
       let navigationExtras: NavigationExtras;
       navigationExtras = {
         queryParams: {
+          "'nomDestinataire'":  this._virementData.name,
+          "'prenomDestinataire'": this._virementData.prenom,
+          "'banqueDestinataire'": this._virementData.banque,
           "'destinataire'": this._virementData.numCompte,
           "'montant'": this._virementData.montant,
           "'justificatif'": this.justificatif
@@ -143,31 +84,10 @@ export class VirementExterneComponent extends AbstractMenuPageComponent implemen
   }
 
   liveBalance(): String {
-    ////////// Appelez un service de simulation BackEnd pour aboutir aux balances si le virement est effictué
-    return (this.balance - this._virementData.montant - 0.1 * this._virementData.montant).toString();
+    return (this.balance - this._virementData.montant - 0.02 * this._virementData.montant).toString();
   }
   getComission(): String {
-      return (this._virementData.montant * 0.1).toString();
-  }
-  protected getPluginInfo(): PluginInfoWrapper {
-    return new PluginInfoWrapper(
-      "Add some 💥 to your app by going beyond the default alert. So here's a couple of alternative ways to feed something back to your users.",
-      Array.of(
-        new PluginInfo(
-          "nativescript-feedback",
-          "Feedback",
-          "https://github.com/EddyVerbruggen/nativescript-feedback",
-          "Non-blocking textual feedback with custom icons and any colors you like. Tap to hide these babies."
-        ),
-
-        new PluginInfo(
-          "nativescript-toast",
-          "Toast",
-          "https://github.com/TobiasHennig/nativescript-toast",
-          "A sober way of providing non-blocking feedback."
-        )
-      )
-    );
+      return (this._virementData.montant * 0.02).toString();
   }
 
 }

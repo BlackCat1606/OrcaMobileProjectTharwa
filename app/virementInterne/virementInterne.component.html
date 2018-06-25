@@ -14,10 +14,18 @@
         <StackLayout>
             <ListPicker [items]="accounts" selectedIndex="1" (selectedIndexChange)="selectedIndexChanged($event)" class="p-15"></ListPicker>
         </StackLayout>
-
-        <Label [text]="balance" hint="Balance"></Label>
         <TextField hint="Montant" [hint]="unit" keyboardType="number" [(ngModel)]="virement.montant"></TextField>
         <Button class="next-button" text="Suivant" (tap)="Next()"></Button>
+    </StackLayout>
+    <StackLayout [@scale-in]="'in'" row="1" class="transparent-area m-t-20">
+            <Label text="Balance Totale :" class="cardTitle"></Label>
+            <Label [text]="liveBalance(0)" class="cardTotal"></Label>
+            <Label text="Comission :" class="cardTitle"></Label>
+            <Label [text]="getComission()" class="cardTotal"></Label>
+    </StackLayout>
+    <StackLayout [@scale-in]="'in'" row="1" class="transparent-area m-t-20">
+            <Label text="Balance Totale :" class="cardTitle"></Label>
+            <Label [text]="liveBalance(1)" class="cardTotal"></Label>
     </StackLayout>
 
 </StackLayout>
