@@ -10,10 +10,13 @@ import { RegisterComponent } from "~/register/register.component";
 import { Page2Component } from "~/rpage2/page2.component";
 import { VirementInterneMotifComponent } from "~/virementInterne-motif/virementInterne-motif.component";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { VirementExterneMotifComponent } from "~/virementExterne-motif/virementExterne-motif.component";
 import { CodeComponent } from "~/code/code.component";
 import {NotificationModule} from "./notifications/notification.module";
 =======
+=======
+>>>>>>> parent of 2f71185... itegration d'anciens composants 2
 
 >>>>>>> parent of 2f71185... itegration d'anciens composants 2
 const APP_ROUTES: Routes = [
