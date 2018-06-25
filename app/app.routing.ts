@@ -10,7 +10,7 @@ import { Page2Component } from "~/rpage2/page2.component";
 import { VirementInterneMotifComponent } from "~/virementInterne-motif/virementInterne-motif.component";
 import { VirementExterneMotifComponent } from "~/virementExterne-motif/virementExterne-motif.component";
 import { CodeComponent } from "~/code/code.component";
-
+import {NotificationModule} from "./notifications/notification.module";
 const APP_ROUTES: Routes = [
   {
     path: "",
@@ -70,7 +70,7 @@ const APP_ROUTES: Routes = [
   },
   {
     path: "notification",
-    loadChildren: "~/notification/notification.module#NotificationModule"
+    loadChildren: "./notifications/notification.module#NotificationModule"
   },
   {
     path: "code",

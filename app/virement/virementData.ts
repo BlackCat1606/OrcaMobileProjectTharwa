@@ -1,4 +1,4 @@
-export  class VirementData {
+export class VirementData {
     public name: string = "";
     public prenom: string = "";
     public banque: string = "";

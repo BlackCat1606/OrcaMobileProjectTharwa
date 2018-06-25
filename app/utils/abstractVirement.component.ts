@@ -7,8 +7,7 @@ import { Virement } from "~/shared/virement/virement";
 import { Compte } from "~/shared/compte/compte";
 import { UserService } from "~/shared/user/user.service";
 import { Router, ActivatedRoute } from "@angular/router";
-import { VirementData } from "./virementData";
-
+import { VirementData } from "~/virementExterne/virementData";
 export abstract class AbstractVirementComponent {
     fancyAlertHelper: FancyalertHelper;
     cfalertDialogHelper: CFAlertDialogHelper;

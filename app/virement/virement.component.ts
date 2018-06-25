@@ -3,9 +3,9 @@ import { Virement } from "~/shared/virement/virement";
 import { UserService } from "~/shared/user/user.service";
 import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
 import { RadDataFormComponent } from "nativescript-ui-dataform/angular";
-import { VirementData } from "../utils/virementData";
 import { tharwaAnimations } from "~/utils/animations";
 import { AbstractVirementComponent } from "~/utils/abstractVirement.component";
+import { VirementData } from "~/virement/virementData";
 
 @Component({
   selector: "page-virement",

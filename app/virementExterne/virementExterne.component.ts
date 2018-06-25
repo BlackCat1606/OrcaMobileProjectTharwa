@@ -13,9 +13,9 @@ import { UserService } from "~/shared/user/user.service";
 import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
 import { Config } from "~/shared/config";
 import { RadDataFormComponent } from "nativescript-ui-dataform/angular";
-import { VirementData } from "../utils/VirementData";
 import { tharwaAnimations } from "~/utils/animations";
 import { AbstractVirementComponent } from "~/utils/abstractVirement.component";
+import { VirementData } from "~/virementExterne/virementData";
 
 @Component({
   selector: "virementExterne",

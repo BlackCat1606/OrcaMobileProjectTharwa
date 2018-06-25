@@ -42,11 +42,8 @@ import { AppComponent } from "~/app.component";
 })
 export class FeedbackComponent extends AbstractMenuPageComponent {
   fancyAlertHelper: FancyalertHelper;
-  cfalertDialogHelper: CFAlertDialogHelper;
-  feedbackHelper: FeedbackHelper;
+
   localNotificationsHelper: LocalNotificationsHelper;
-  snackbarHelper: SnackbarHelper;
-  toastHelper: ToastHelper;
 
   constructor(protected appComponent: AppComponent,
               protected vcRef: ViewContainerRef,
@@ -55,11 +52,8 @@ export class FeedbackComponent extends AbstractMenuPageComponent {
     super(appComponent, vcRef, modalService);
 
     this.fancyAlertHelper = new FancyalertHelper();
-    this.cfalertDialogHelper = new CFAlertDialogHelper();
-    this.feedbackHelper = new FeedbackHelper();
     this.localNotificationsHelper = new LocalNotificationsHelper();
-    this.snackbarHelper = new SnackbarHelper();
-    this.toastHelper = new ToastHelper(this.toastService);
+
   }
 
   protected getPluginInfo(): PluginInfoWrapper {
