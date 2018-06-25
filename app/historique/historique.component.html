@@ -1,0 +1,28 @@
+<ActionBar title="Historique" class="ActionBarTitle">
+    
+    <NavigationButton text="Go Back" icon="res://ic_arrow_back"></NavigationButton>
+    <ActionItem ios.systemIcon="2" icon="res://ic_notifications" ios.position="right"></ActionItem>
+    <ActionItem ios.systemIcon="3" icon="res://ic_account" ios.position="right"></ActionItem>
+
+</ActionBar>
+
+    <GridLayout class="page page-content" tkMainContent>
+        <ListView [items]="historicalArray">
+            <ng-template let-item="item" let-i="index">
+                <StackLayout orientation="horizontal" class="list-item">
+                    <Image [src]="item.avatar" stretch="none" horizontalAlignment="center"></Image>
+                    <StackLayout orientation="vertical">
+                        <Label [text] = "item.interlocuteur" class="list-label"></Label>
+                        <StackLayout orientation="horizontal" class="list-cost" >
+                            <Label [text] = "item.montant"></Label>
+                        </StackLayout>
+                        <Label [text] = "item.commission" class="list-cost"></Label>
+                    </StackLayout>
+                    <StackLayout orientation="vertical" class="list-date">
+                        <Label [text] = "item.date"></Label>
+                        <Label [text] = "item.time" class="time"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </ng-template>
+        </ListView>
+    </GridLayout>

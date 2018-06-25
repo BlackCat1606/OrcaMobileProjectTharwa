@@ -1,0 +1,45 @@
+ActionBar{
+    background-color: #F64060
+}
+
+.ActionBarTitle{
+    color: white;
+    font-family: Medium;
+    font-size: 20pt;
+}
+
+.list-item{
+    padding: 12;
+    border-left-style: solid;
+    border-left-width: 16px;
+    border-left-color: coral;
+}
+
+.list-label{
+    color: black;
+    margin-left: 16;
+    font-family: Meduim;
+    font-size: 16pt;
+}
+
+.list-cost{
+    color: black;
+    opacity: 0.5;
+    margin-left: 16;
+    font-family: Roboto;
+    font-size: 14pt;
+}
+
+.list-date{
+    color: black;
+    opacity: 0.5;
+    font-family: Roboto;
+    font-size: 14pt;
+    float: right;
+    margin-top: 45px;
+    margin-left: 54px;
+}
+
+.time{
+    margin-left:74px
+}

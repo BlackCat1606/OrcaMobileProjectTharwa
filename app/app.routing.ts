@@ -9,6 +9,7 @@ import { RegisterComponent } from "~/register/register.component";
 import { Page2Component } from "~/rpage2/page2.component";
 import { VirementInterneMotifComponent } from "~/virementInterne-motif/virementInterne-motif.component";
 import { VirementExterneMotifComponent } from "~/virementExterne-motif/virementExterne-motif.component";
+import { CodeComponent } from "~/code/code.component";
 
 const APP_ROUTES: Routes = [
   {
@@ -63,6 +64,15 @@ const APP_ROUTES: Routes = [
     path: "virementInterneMotif",
     component: VirementInterneMotifComponent
   },
+  {
+    path: "historique",
+    loadChildren: "~/historique/historique.module#HistoriqueModule"
+  },
+  {
+    path: "code",
+    loadChildren: "~/code/code.module#CodedModule"
+  },
+
 ];
 
 // TODO swap

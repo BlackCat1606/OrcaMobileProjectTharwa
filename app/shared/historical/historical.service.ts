@@ -6,25 +6,21 @@ import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-
 import { Historical } from "./historical";
+
 import { Config } from "../config";
 
 @Injectable()
 export class HistoricalService implements OnInit {
+  ngOnInit() {
 
-    constructor(private http: Http) { }
-
-    ngOnInit() { }
-
-    getHistorical(accessToken: string) {
-        let headers = new Headers();
-        headers.append("token", accessToken);
-        return this.http.get(Config.apiAddress + "/clients/historique", { headers: headers });
-    }
-
-    handleErrors(error: Response) {
-        console.log(JSON.stringify(error.json()));
-        return Observable.throw(error);
-    }
+  }
+  constructor(private http: Http) { }
+  getHistorical(accessToken: string, typeCompte: string) {
+    let headers = new Headers();
+    headers.append("Content-Type", "application/x-www-form-urlencoded");
+    headers.append("token", accessToken);
+    let body = "type=" + typeCompte;
+    return this.http.post(Config.apiAddress + '/clients/historique', body, { headers: headers });
+  }
 }

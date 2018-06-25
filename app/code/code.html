@@ -1,0 +1,12 @@
+<ActionBar title="Confirmer Votre Authentification" class="ActionBarTitle"></ActionBar>
+
+<StackLayout orientation="vertical">
+    <Label text="Veuillez saisir le code envoyé à votre" class="texte"></Label>
+    <Label text="adresse email client@example.com" class="texte"></Label>
+    <StackLayout orientation="horizontal" horizontalAlignment="center" style="margin-top:100px">
+			<FloatLabel placeholder="Code de Confirmation" secure="true" [(ngModel)]="entered" class="confirm-input"></FloatLabel>
+    </StackLayout>
+    <Button text="Confirmer" class="confirm-button" (tap)="confirm()"></Button>
+    <label class="label-login" text="Renvoyer le code" (tap)="goBack()"></label>
+
+</StackLayout>

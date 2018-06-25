@@ -25,6 +25,7 @@ import { NgZone } from "@angular/core";
 import { AppComponent } from "~/app.component";
 import { SocketIO } from "nativescript-socketio";
 import { tharwaAnimations } from "~/utils/animations";
+import { CFAlertDialog } from "nativescript-cfalert-dialog";
 @Component({
     selector: "acceuil",
     moduleId: module.id,
@@ -66,9 +67,13 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
     constructor(protected menuComponent: AppComponent,
         protected vcRef: ViewContainerRef,
         protected modalService: ModalDialogService,
-        private toastService: ToastService, private router: Router, private route: ActivatedRoute,
-        private userService: UserService, private compteService: CompteService,
-        private ngZone: NgZone, private socketIO: SocketIO) {
+        private toastService: ToastService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private userService: UserService,
+        private compteService: CompteService,
+        private ngZone: NgZone,
+        private socketIO: SocketIO) {
         super(menuComponent, vcRef, modalService);
         this.comptes = [];
         this.titles = [];
@@ -83,7 +88,6 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
     }
     ngOnInit(): void {
 
-        this.login(Config.access_token);
         this.localNotificationsHelper = new LocalNotificationsHelper();
         this.user = new User(1);
         this.init = 0;
@@ -399,6 +403,6 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
 
 
     logout() {
-        this.socketIO.emit('deconnexion', 'Salut serveur, ça va ?');
+        this.socketIO.emit('deconnexion', 'Client déconnecté');
     }
 }

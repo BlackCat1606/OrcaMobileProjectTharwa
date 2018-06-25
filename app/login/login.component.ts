@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, NgZone, ViewContainerRef } from "@angular/core";
+import { Component, OnInit, ViewChild, NgZone} from "@angular/core";
 import { Router, NavigationExtras, ActivatedRoute } from "@angular/router";
 import { User } from "../shared/user/user";
 import { UserService } from "../shared/user/user.service";
@@ -7,11 +7,14 @@ import * as dialogs from "ui/dialogs";
 import { CurrentUser } from "../shared/CurrentUser";
 import { Config } from "../shared/config";
 import { isIOS } from "platform";
-
-import { ModalDialogService, RouterExtensions } from "nativescript-angular";
-import { AppComponent } from "~/app.component";
+import { RouterExtensions } from "nativescript-angular";
 import { tharwaAnimations } from "~/utils/animations";
+import { FancyalertHelper } from "~/helpers/fancyalert-helper";
+import { CFAlertDialogHelper } from "~/helpers/cfalertdialog-helper";
+import { FeedbackHelper } from "~/helpers/feedback-helper";
 
+import { CFAlertDialog, CFAlertStyle, CFAlertActionStyle, CFAlertActionAlignment, CFAlertGravity } from "nativescript-cfalert-dialog";
+import { SocketIO } from "nativescript-socketio";
 @Component({
   selector: "login",
   templateUrl: "./login.html",
@@ -20,31 +23,29 @@ import { tharwaAnimations } from "~/utils/animations";
   animations: [tharwaAnimations]
 })
 export class LoginComponent  implements OnInit {
-  public user: User;
-  isLoggingIn = true;
-  viaSMS = false;
-  choice: string = "";
-  viaMail = false;
-  username = "";
-  public myCode;
-  public access_token;
-  public refresh_token;
-  isIOS: boolean = isIOS;
-  isTablet: boolean = Config.isTablet;
+  ///// Variables
+  user: User; viaSMS = false; choice: string = ""; viaMail = false;
+  myCode; access_token; refresh_token; isIOS: boolean = isIOS; isTablet: boolean = Config.isTablet;
+  fancyAlertHelper: FancyalertHelper; cfalertDialogHelper: CFAlertDialogHelper;
+  feedbackHelper: FeedbackHelper; cfalertDialog: CFAlertDialog;
+  //// Constructeur
   constructor(
     private router: Router,
     private userService: UserService,
     private page: Page,
     private route: ActivatedRoute,
     private ngZone: NgZone,
-    protected vcRef: ViewContainerRef,
-    protected appComponent: AppComponent,
-    protected modalService: ModalDialogService,
-    protected routerExtensions: RouterExtensions) {
+    protected routerExtensions: RouterExtensions,
+    protected socketIO: SocketIO) {
     this.user = new User(0);
     this.choice = "";
+    this.fancyAlertHelper = new FancyalertHelper();
+    this.cfalertDialog = new CFAlertDialog();
+    this.cfalertDialogHelper = new CFAlertDialogHelper();
+    this.feedbackHelper = new FeedbackHelper();
   }
-  ngOnInit() {
+//// Initialisation
+ngOnInit() {
     this.page.actionBarHidden = true;
     this.user.email = "em_hammi@esi.dz";
     this.user.password = "orca@2018";
@@ -67,27 +68,8 @@ export class LoginComponent  implements OnInit {
    CurrentUser.currentUser.address = this.user.address;
    CurrentUser.currentUser.job =  this.user.job;*/
   }
-
-  submit() {
-    dialogs.action({
-      title: "Confirmation",
-      message: "Veuillez Choisir l'option pour recevoir un code pour confirmer votre authentification ",
-      cancelButtonText: "ANNULER",
-      actions: ["Email", "SMS"]
-    }).then(result => {
-      if (result === "Email") {
-        this.choice = "0";
-        this.viaMail = true;
-        this.toNextPage();
-      } else if (result === "SMS") {
-        this.choice = "1";
-        this.viaSMS = true;
-        this.toNextPage();
-      }
-    });
-
-  }
-  public toNextPage() {
+/// Validation d'input, requéte d'authenitfication et passage de paramétres vers la page prochaine
+toNextPage() {
     if (this.viaMail || this.viaSMS) {
       this.userService.authentifier(this.user, this.choice)
         .subscribe(
@@ -109,14 +91,78 @@ export class LoginComponent  implements OnInit {
             this.router.navigate(["/code"], navigationExtras);
           },
           (error) => {
-            alert("something went wrong : " + error);
+            this.gererMessages(error);
             console.log(error);
           }
         );
     }
+    else {
+      this.feedbackHelper.showError("Champs Manquants", "Veuillez remplir tous les champs");
+         }
   }
-  public register() {
+/// Aller vers la page d'inscription
+register() {
     this.router.navigate(["/register"]);
   }
-
+/// Gérer les messages d'erreurs du Serveur
+gererMessages(error) {
+    switch (error.code) {
+      case 200: this.fancyAlertHelper.showSuccess("Connexion Réussite", "Bienvenu a Tharwa");
+        break;
+      case 400: this.fancyAlertHelper.showError("Erreur d'authentification !", error.message );
+        break;
+      case 404: this.fancyAlertHelper.showError("Utilisateur non trouvé !", error.message);
+        break;
+      case 500: this.fancyAlertHelper.showError("Erreur Serveur ", error.message);
+        break;
+    }
+  }
+/// choisir le type de validation d'authentification et faire la requéte
+submit(): void {
+    if (this.user.email && this.user.password) {
+    const items: any = ["Email", "SMS"];
+    let selection: string;
+    const options: any = {
+      dialogStyle: CFAlertStyle.ALERT,
+      title: "Confirmation de Connexion",
+      titleColor: "#F64060",
+      textAlignment: CFAlertGravity.CENTER_HORIZONTAL,
+      singleChoiceList: {
+        items: items,
+        selectedItem: 2,
+        onClick: (dialog, index) => {
+          selection = items[index];
+          console.log(`Option selected: ${selection}`);
+        }
+      },
+      buttons: [
+        {
+          text: "Confirmer",
+          buttonStyle: CFAlertActionStyle.POSITIVE,
+          buttonAlignment: CFAlertActionAlignment.JUSTIFIED,
+          onClick: (pressedButton: string) => {
+            if (selection === "Email") {
+              this.choice = "0";
+              this.viaMail = true;
+              this.toNextPage();
+            } else if (selection === "SMS") {
+              this.choice = "1";
+              this.viaSMS = true;
+              this.toNextPage();
+            }
+          }
+        },
+        {
+          text: "Annuler",
+          buttonStyle: CFAlertActionStyle.NEGATIVE,
+          buttonAlignment: CFAlertActionAlignment.JUSTIFIED,
+          onClick: (pressedButton: string) => {
+        }, }]
+    };
+    this.cfalertDialog.show(options);
+  }
+  else {
+    this.feedbackHelper.showError("Champs Manquants", "Veuillez remplir tous les champs");
+  }
+}
 }

@@ -11,7 +11,7 @@ export class Config {
   public static access_token = "SkCWpa8TzBdFXVP9SQS21WgJwFJZfXJpxDQqIiq5v25LBXZobWnfNXUqlByuEJ1mhJhVubl04b2m2DZbpzqmDWn9rjDU4hHDMiKi9Drr9buSQXNduHrOMsyrXCYXhj6fZt5oczRso0BQlSeKY5BJRLjQt4Cm0bgPxN7EMbHo27HOaZrhmMXQDpErwoPRGvLHYvy4aJlxs1pJl5SDo6ulGOTPEEvJvR1QsVJe0Q18XEBWW4gR2H9pcc1tRwVzDrs";
   public static refresh_token = "";
 
-  public static oauthAddress = "http://192.168.0.39:8081";
-  public static apiAddress = "http://192.168.0.39:8080";
+  public static oauthAddress = "http://25.18.251.171:8081";
+  public static apiAddress = "http://25.18.251.171:8080";
   public static expiration: any;
 }

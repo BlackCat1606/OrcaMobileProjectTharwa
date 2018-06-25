@@ -6,6 +6,7 @@ import {
   CFAlertActionStyle,
   CFAlertStyle
 } from "nativescript-cfalert-dialog";
+import { constants } from "zlib";
 
 export class CFAlertDialogHelper {
   private cfalertDialog: CFAlertDialog;
@@ -111,7 +112,7 @@ export class CFAlertDialogHelper {
         {
           text: "Confirmer",
           buttonStyle: CFAlertActionStyle.POSITIVE,
-          buttonAlignment: CFAlertActionAlignment.END,
+          buttonAlignment: CFAlertActionAlignment.JUSTIFIED,
           onClick: (pressedButton: string) => {
             alert({
               title: "You selected:",
@@ -123,7 +124,7 @@ export class CFAlertDialogHelper {
         {
           text: "Annuler",
           buttonStyle: CFAlertActionStyle.NEGATIVE,
-          buttonAlignment: CFAlertActionAlignment.END,
+          buttonAlignment: CFAlertActionAlignment.JUSTIFIED,
         }
 
       ]

@@ -6,10 +6,14 @@ export class Historical {
   commission: string;
   typeEm: string;
   typeDest: string;
+  dateTime: string;
   date: string;
+  time: string;
+  avatar: string;
   emRec: string;
   interlocuteur: string;
 
-  constructor() { }
+  constructor() {
+  }
 
 }
