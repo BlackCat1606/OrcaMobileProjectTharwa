@@ -28,8 +28,11 @@ import { VirementExterneMotifComponent } from "~/virementExterne-motif/virement-
 import { VirementInterneMotifComponent } from "~/virementInterne-motif/virementInterne-motif.component";
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { VirementExterneMotifComponent } from "~/virementExterne-motif/virementExterne-motif.component";
 import { FloatLabel } from "~/utils/float-label/float-label.component";
+=======
+>>>>>>> parent of 2f71185... itegration d'anciens composants 2
 =======
 >>>>>>> parent of 2f71185... itegration d'anciens composants 2
 =======

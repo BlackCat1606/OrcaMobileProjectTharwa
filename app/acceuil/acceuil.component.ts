@@ -179,7 +179,11 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
             cancelButtonText: "ANNULER",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             actions: ["Virement vers un de mes comptes", "Virement Tharwa", "Virement Externe"]
+=======
+            actions: ["Virement vers un de mes comptes", "Virement Externe"]
+>>>>>>> parent of 2f71185... itegration d'anciens composants 2
 =======
             actions: ["Virement vers un de mes comptes", "Virement Externe"]
 >>>>>>> parent of 2f71185... itegration d'anciens composants 2
