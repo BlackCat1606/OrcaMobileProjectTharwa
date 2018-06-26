@@ -7,10 +7,7 @@ ActionBar{
   background-color: #F64060
 }
 
-StackLayout {
-  padding-bottom: 15;
-  background-color: white;
-}
+
   
 .ActionBarTitle{
   color: white;

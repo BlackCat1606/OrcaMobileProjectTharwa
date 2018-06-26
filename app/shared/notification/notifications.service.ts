@@ -18,6 +18,6 @@ export class NotificationService implements OnInit {
   getNotifications(accessToken: string) {
     let headers = new Headers();
     headers.append("token", accessToken);
-    return this.http.get (Config.apiAddress + '/clients/historique', { headers: headers });
+    return this.http.get (Config.apiAddress + '/notification/unread', { headers: headers });
   }
 }

@@ -17,7 +17,7 @@ export abstract class AbstractVirementComponent {
     virementInterne: boolean;
     comission;
     compte: Compte;
-    justificatif;
+    justificatif: any;
     unit;
     numCompteExterne;
     balance;

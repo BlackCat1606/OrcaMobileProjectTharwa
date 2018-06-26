@@ -7,12 +7,13 @@
 </ActionBar>
 
 <StackLayout orientation="vertical">
+    <Gradient height="100%" direction="to right" colors="#dae2f8, #d6a4a4" class="p-20">
     <ScrollView>
         <Label text="Veuillez entrer le motif du virement" class="texte"></Label>
-        <StackLayout [style.margin-top]="getMargin()">
-            <TextView hint="Motif De virement" [(ngModel)]="virement.motif"></TextView>
+        <StackLayout  class="transparent-area m-t-20">
+            <TextView  style="margin-top: 15px" [(ngModel)]="virement.motif" borderColor="#DEDEDE" borderWidth="1" height="100px" hint="Motif de Virement"  returnKeyType="send" class="input input-border"></TextView>
             <StackLayout *ngIf="justificatif==1">
-                <Label text="Votre virement dépasse 200.000 DA" class="texte"></Label>
+                <Label text="Virement dépasse 200.000 DA" class="texte"></Label>
                 <Label text="Veuillez joindre un justificatif" class="texte"></Label>
                 <Image [src]="picture" stretch="aspectFill" class="myImage" horizontalAlignment="center"></Image>
                 <Button class="profile-button" text="Votre Justification" (tap)="cameraOpen()"></Button>
@@ -20,4 +21,5 @@
             <Button text="Confirmer" class="submit-button" (tap)="submit()"></Button>
         </StackLayout>
     </ScrollView>
+    </Gradient>
 </StackLayout>

@@ -21,6 +21,6 @@ export class HistoricalService implements OnInit {
     headers.append("Content-Type", "application/x-www-form-urlencoded");
     headers.append("token", accessToken);
     let body = "type=" + typeCompte;
-    return this.http.post(Config.apiAddress + '/clients/historique', body, { headers: headers });
+    return this.http.post(Config.apiAddress + "/clients/historique", body, { headers: headers });
   }
 }

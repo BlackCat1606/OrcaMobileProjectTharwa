@@ -7,11 +7,6 @@ ActionBar{
     font-family: Medium;
     font-size: 20pt;
 }
-
-StackLayout {
-    padding-bottom: 15;
-    background-color:white;
-}
 .myImage{
     margin-top: 10px;
     height: 150;

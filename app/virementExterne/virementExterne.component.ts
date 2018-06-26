@@ -18,11 +18,11 @@ import { AbstractVirementComponent } from "~/utils/abstractVirement.component";
 import { VirementData } from "~/virementExterne/virementData";
 
 @Component({
-  selector: "page-virement",
+  selector: "virementExterne",
   moduleId: module.id,
   providers: [UserService],
-  templateUrl: "./virement.component.html",
-  styleUrls: ["virement-common.css"],
+  templateUrl: "./virementExterne.component.html",
+  styleUrls: ["virementExterne-common.css"],
   animations: [tharwaAnimations]
 
 })
@@ -45,18 +45,6 @@ export class VirementExterneComponent extends AbstractVirementComponent implemen
     this.comission = "2%";
   }
   Next() {
-   /* let isValid = true;
-
-    let p1 = this.dataFormComp.dataForm.getPropertyByName("numCompte");
-
-    if (p1.valueCandidate === this.monNumCompte) {
-      p1.errorMessage = "Vous ne pouvez pas virez vers le méme compte";
-      this.dataFormComp.dataForm.notifyValidated("numCompte", false);
-      isValid = false;
-    } else {
-      this.dataFormComp.dataForm.notifyValidated("numCompte", true);
-    }*/
-
     let hasErrors = this.dataFormComp.dataForm.hasValidationErrors();
     if (hasErrors) {
       this.feedbackHelper.showError("Erreur de Remplissage du formulaire!", "Veuillez Remplir tous les champs correctement pour continuer");
@@ -71,7 +59,7 @@ export class VirementExterneComponent extends AbstractVirementComponent implemen
       let navigationExtras: NavigationExtras;
       navigationExtras = {
         queryParams: {
-          "'nomDestinataire'":  this._virementData.name,
+          "'nomDestinataire'":  this._virementData.nom,
           "'prenomDestinataire'": this._virementData.prenom,
           "'banqueDestinataire'": this._virementData.banque,
           "'destinataire'": this._virementData.numCompte,
@@ -79,9 +67,14 @@ export class VirementExterneComponent extends AbstractVirementComponent implemen
           "'justificatif'": this.justificatif
         }
       };
+
       this.router.navigate(["/virementExterneMotif"], navigationExtras);
     }
   }
+  get virementData(): VirementData {
+    return this._virementData;
+  }
+  _virementData: VirementData;
 
   liveBalance(): String {
     return (this.balance - this._virementData.montant - 0.02 * this._virementData.montant).toString();

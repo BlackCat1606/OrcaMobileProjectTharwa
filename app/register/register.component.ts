@@ -21,10 +21,7 @@ export class RegisterComponent implements OnInit {
     ngOnInit() {
         this.page.actionBarHidden = true;
         this.user = new User(0);
-        this.user.firstname = "Mohamed";
-        this.user.lastname = "Hammi";
-        this.user.email = "em_hammi@esi.dz";
-        this.user.password = "orca@2018";
+
     }
     public static us: User;
     public constructor(
@@ -46,7 +43,6 @@ export class RegisterComponent implements OnInit {
         this.location.back();
     }
     public goSuivant() {
-        if (this.user.email && this.user.firstname && this.user.lastname && this.user.password) {
         let navigationExtras: NavigationExtras = {
             queryParams: {
                 "firstname": this.user.firstname,
@@ -56,10 +52,6 @@ export class RegisterComponent implements OnInit {
             }
         };
         this.router.navigate(["/page2"], navigationExtras);
-    }
-    else {
-        this.feedbackHelper.showError("Champs Manquants", "Veuillez remplir tous les champs");
-    }
 
     }
 

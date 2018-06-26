@@ -29,7 +29,7 @@ import { PluginInfo } from '~/shared/plugin-info';
 
 @Component({
     moduleId: module.id,
-    selector: 'Historique',
+    selector: 'historique',
     templateUrl: './historique.component.html',
     providers: [UserService, InfoService, VirementService, HistoricalService],
     styleUrls: ["./historique-common.css", "./historique.css"],
@@ -180,9 +180,10 @@ export class HistoriqueComponent extends AbstractMenuPageComponent implements On
                         i++;
                     }
                 },
-            (error) => {
-                this.feedbackHelper.showError("Erreur de chargement de donées", error["message"]);
-            });
+                (error) => {
+                    console.log("Erreur historique", error);
+                    this.feedbackHelper.showError("Erreur de chargement de donées", error["message"]);
+                });
     }
     protected getPluginInfo(): PluginInfoWrapper {
         return new PluginInfoWrapper(

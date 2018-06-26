@@ -4,16 +4,13 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 
 import { CodeRoutingModule } from "./code-routing.module";
 import { CodeComponent } from "./code.component";
-import { FloatLabel } from "~/utils/float-label/float-label.component";
-
 @NgModule({
     imports: [
         NativeScriptCommonModule,
         CodeRoutingModule,
     ],
     declarations: [
-        CodeComponent
-    ],
+        CodeComponent,    ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]

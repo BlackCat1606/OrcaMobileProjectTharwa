@@ -3,8 +3,8 @@
     <ScrollView orientation="vertical">
         <StackLayout class="transparent-area" verticalAlignment="center">
             <Image src="res://login_logo" stretch="none" horizontalAlignment="center"></Image>
-            <FloatLabel placeholder="Email" hint="Email Address" keyboardType="email" [(ngModel)]="user.email" autocorrect="false" autocapitalizationType="none" class="text-login"></FloatLabel>
-            <FloatLabel  placeholder="Mot de passe" hint="Password" secure="true" [(ngModel)]="user.password" class="text-login"></FloatLabel>
+            <TextField  hint="Email Address" keyboardType="email" [(ngModel)]="user.email" autocorrect="false" autocapitalizationType="none" class="text-login"></TextField>
+            <TextField  hint="Password" secure="true" [(ngModel)]="user.password" class="text-login"></TextField>
             <Button text="Se connecter" class="submit-button" (tap)="submit()"></Button>
             <label class="label-login" text="Créer un compte" (tap)="register()"></label>
         </StackLayout>

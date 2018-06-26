@@ -24,19 +24,11 @@ import { TimeFromNow } from "./timeFromNow.pipe";
 import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular";
 import { LoginComponent } from "~/login/login.component";
 import { Page2Component } from "~/rpage2/page2.component";
-import { VirementExterneMotifComponent } from "~/virementExterne-motif/virement-motif.component";
 import { VirementInterneMotifComponent } from "~/virementInterne-motif/virementInterne-motif.component";
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { VirementExterneMotifComponent } from "~/virementExterne-motif/virementExterne-motif.component";
 import { FloatLabel } from "~/utils/float-label/float-label.component";
-=======
->>>>>>> parent of 2f71185... itegration d'anciens composants 2
-=======
->>>>>>> parent of 2f71185... itegration d'anciens composants 2
-=======
->>>>>>> parent of 2f71185... itegration d'anciens composants 2
+import { FloatLabelModule } from "~/utils/float-label/float-label.module";
+import { EditProfilComponent } from "~/editProfil/editProfil.component";
 
 
 const fs = require("file-system");
@@ -73,6 +65,7 @@ Config.isTablet = device.deviceType === DeviceType.Tablet;
     AppComponent,
     HomeComponent,
     TimeFromNow,
+    EditProfilComponent,
     VirementExterneMotifComponent,
     VirementInterneMotifComponent,
     VirementMotifComponent,

@@ -7,6 +7,7 @@
 </ActionBar>
 
 <StackLayout orientation="vertical">
+        <Gradient height="100%" direction="to right" colors="#dae2f8, #d6a4a4" class="p-20">
     <ScrollView>
         <Label text="Veuillez entrer le motif du virement" class="texte"></Label>
         <StackLayout [style.margin-top]="getMargin()">
@@ -20,4 +21,5 @@
             <Button text="Confirmer" class="submit-button" (tap)="submit()"></Button>
         </StackLayout>
     </ScrollView>
+    </Gradient>
 </StackLayout>

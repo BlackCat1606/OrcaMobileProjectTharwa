@@ -56,9 +56,7 @@ export class Page2Component implements OnInit {
         this.user.email = params["email"],
         this.user.password = params["password"];
         } );
-        this.user.address = "Oued Semar";
-        this.user.phone = "0668985879";
-        this.user.job = "Etudiant";
+
     }
 
     public constructor(
@@ -104,7 +102,7 @@ export class Page2Component implements OnInit {
                         },
                         error: (e) => {
                             console.log(JSON.stringify(e));
-                            this.gererMessages(e);
+                            this.feedbackHelper.showError("Erreur d'inscription", JSON.stringify(e));
                         },
                         complete: () => {
                             console.log("complete");
@@ -123,7 +121,7 @@ export class Page2Component implements OnInit {
                             },
                             error: (e) => {
                                 console.log(JSON.stringify(e));
-                                this.gererMessages(e);
+                                this.feedbackHelper.showError("Erreur d'inscription", JSON.stringify(e));
                             },
                             complete: () => {
                                 console.log("complete");

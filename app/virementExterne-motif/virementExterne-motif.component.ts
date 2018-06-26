@@ -19,18 +19,17 @@ import { tharwaAnimations } from '~/utils/animations';
 
 @Component({
   moduleId: module.id,
-  selector: 'app-virementExterne-motif',
+  selector: 'virementExterneMotif',
   templateUrl: './virementExterne-motif.component.html',
   providers: [VirementService],
   styleUrls: ['./virementExterne-motif.css'],
   animations: [tharwaAnimations]
 })
 export class VirementExterneMotifComponent implements OnInit {
-
+  justificatif: any;
   virement: Virement;
   succe: string;
-  picture: any;
-  justificatif;
+  picture: any ;
   file: string;
   url: string;
   counter: number;
@@ -49,7 +48,6 @@ export class VirementExterneMotifComponent implements OnInit {
   private nomDest: string;
   private prenomDest: string;
   private banqueDest: string;
-
   constructor(private router: Router, private route: ActivatedRoute,
     private virementService: VirementService, private location: Location) {
     this.fancyAlertHelper = new FancyalertHelper();
@@ -73,6 +71,8 @@ export class VirementExterneMotifComponent implements OnInit {
       this.virement.montant = params["'montant'"];
       this.justificatif = params["'justificatif'"];
     });
+    console.log(this.justificatif);
+    // alert(this.justificatif);
   }
   cameraOpen() {
     camera.requestPermissions();
@@ -123,7 +123,7 @@ export class VirementExterneMotifComponent implements OnInit {
           },
           error: (e) => {
             console.log(JSON.stringify(e));
-            this.gererMessages(e["status"]);
+            this.gererMessages(e["responseCode"]);
           },
           complete: () => {
             console.log("complete");
@@ -142,7 +142,7 @@ export class VirementExterneMotifComponent implements OnInit {
             },
             error: (e) => {
               console.log(JSON.stringify(e));
-              this.gererMessages(e["status"]);
+              this.gererMessages(e["responseCode"]);
             },
             complete: () => {
               console.log("complete");
@@ -156,24 +156,16 @@ export class VirementExterneMotifComponent implements OnInit {
 
 
   private uploadMultipartImagePicker(image: any, justif: boolean): Subject<any> {
-    let fileUri;
-    let filename;
-    let mimetype;
-    let uploadType;
-    let request;
-    if (justif) {
+
+      let uploadType;
+      let request;
       let fileUri = image.fileUri;
       let filename = fileUri.substring(fileUri.lastIndexOf('/') + 1);
       let mimetype = filename.substring(filename.lastIndexOf('.') + 1);
-    }
-    else {
-      let fileUri = "";
-      let filename = "";
-      let mimetype = "";
-    }
+
     uploadType = "image";
     request = {
-      url: Config.apiAddress + "/virement/VirementClientTh",
+      url: Config.apiAddress + "/virement/externe",
       method: "POST",
       headers: {
         "Content-Type": "application/form-data",

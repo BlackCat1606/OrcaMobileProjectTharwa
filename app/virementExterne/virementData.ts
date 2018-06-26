@@ -1,5 +1,5 @@
 export class VirementData {
-    public name: string = "";
+    public nom: string = "";
     public prenom: string = "";
     public banque: string = "";
     public numCompte: string = "";

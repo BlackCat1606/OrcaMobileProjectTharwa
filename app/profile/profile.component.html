@@ -1,0 +1,51 @@
+<ActionBar title="Profil" class="ActionBarTitle">
+    
+    <NavigationButton text="Go Back" icon="res://ic_navbar" (tap)="toggleTheMenu()"></NavigationButton>
+    <ActionItem ios.systemIcon="2" icon="res://ic_notifications" (tap)="goNotifications()" ios.position="right"></ActionItem>
+    <ActionItem ios.systemIcon="3" icon="res://ic_account" (tap) = "goProfile()" ios.position="right"></ActionItem>
+
+</ActionBar>
+
+    <!--
+    Use the tkMainContent directive to display the content of the page when you have an app drawer.
+    -->
+
+        <StackLayout class="main-content" style="background-color: gainsboro">
+                <Gradient height="100%" direction="to right" colors="#dae2f8, #d6a4a4" class="p-20">
+            <StackLayout>
+                <StackLayout orientation="horizontal" class="profil">
+                    <Image src="res://avatar" stretch="none" horizontalAlignment="center"></Image>
+                    <StackLayout orientation="vertical" class="profil-info">
+                        <Label class="profil-email" text=""></Label>
+                        <Label class="profil-name" [text]="fullName" textWrap="true"></Label>
+                        <Label class="profil-email" [text]="user.email" textWrap="true"></Label>
+                        <Label class="profil-email" [text]="user.phone"></Label>
+                    </StackLayout>
+                </StackLayout>
+                <Button class="edit-button" text="Edit Profil" (tap)="Next()"></Button>
+            </StackLayout>
+                     
+            <GridLayout class="page page-content" tkMainContent style="margin-top: 16px">
+                <StackLayout class="list-layout">
+                    <Label text= "Comtpes" class="list-comptes"></Label>
+                    <ListView [items]="comptes">
+                        <ng-template let-item="item" let-i="index">
+                            <StackLayout orientation="horizontal" class="list-item">
+                                <Image *ngIf="item.type==0" src="res://ic_dzd_courant" stretch="none" horizontalAlignment="center"></Image>
+                                <Image *ngIf="item.type==1" src="res://ic_dzd_epargne" stretch="none" horizontalAlignment="center"></Image>
+                                <Image *ngIf="item.type==2" src="res://ic_euro" stretch="none" horizontalAlignment="center"></Image>
+                                <Image *ngIf="item.type==3" src="res://ic_dollar" stretch="none" horizontalAlignment="center"></Image>
+                                <StackLayout orientation="vertical">
+                                    <Label *ngIf="item.type==0" text="Courant" class="list-label"></Label>
+                                    <Label *ngIf="item.type==1" text="Epargne" class="list-label"></Label>
+                                    <Label *ngIf="item.type==2" text="Devise Courant" class="list-label"></Label>
+                                    <Label *ngIf="item.type==3" text="Devise Courant" class="list-label"></Label>
+                                    <Label [text] = "item.balance" class="list-cost"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </ng-template>
+                    </ListView>
+                </StackLayout>
+            </GridLayout>
+                </Gradient>
+        </StackLayout>

@@ -48,9 +48,6 @@ export class LoginComponent  implements OnInit {
 //// Initialisation
 ngOnInit() {
     this.page.actionBarHidden = true;
-    this.user.email = "em_hammi@esi.dz";
-    this.user.password = "orca@2018";
-
     /*this.page.backgroundImage = "res://bg_login";
      this.route.queryParams.subscribe(params => {
        this.user.firstname = params["firstname"],
@@ -92,7 +89,7 @@ toNextPage() {
             this.router.navigate(["/code"], navigationExtras);
           },
           (error) => {
-            this.gererMessages(error);
+              this.feedbackHelper.showError("Erreur Authentification", JSON.stringify(error));
             console.log(error);
           }
         );
@@ -111,7 +108,6 @@ gererMessages(error) {
   }
 /// choisir le type de validation d'authentification et faire la requéte
 submit(): void {
-    if (this.user.email && this.user.password) {
     const items: any = ["Email", "SMS"];
     let selection: string;
     const options: any = {
@@ -155,8 +151,4 @@ submit(): void {
     };
     this.cfalertDialog.show(options);
   }
-  else {
-    this.feedbackHelper.showError("Champs Manquants", "Veuillez remplir tous les champs");
-  }
-}
 }

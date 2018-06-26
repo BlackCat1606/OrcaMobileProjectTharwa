@@ -1,0 +1,66 @@
+ActionBar{
+    background-color: #F64060
+}
+
+.ActionBarTitle{
+    color: white;
+    font-family: Medium;
+    font-size: 20pt;
+}
+
+.profil-pic{
+    margin-top:16;
+}
+
+.edit-info{
+    background-color: white;
+    margin-top: 16;
+    height: 300;
+}
+
+.list-info{
+    color: black;
+    margin-left: 16;
+    font-family: Meduim;
+    font-size: 20pt;
+    margin-top: 16;
+}
+
+
+TextField{
+    width: 90%;
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+    border-bottom-color: #F64060;
+    margin-top: -8px;
+}
+
+.list-item{
+    padding: 12;
+    margin-left: 16;
+}
+
+.list-label{
+    color: black;
+    margin-left: 16;
+    font-family: Meduim;
+    font-size: 18pt;
+    margin-top: 12px;
+}
+
+.list-input{
+    color: #F64060;
+    margin-left: 16;
+    font-family: Roboto;
+    font-size: 14pt;
+}
+
+.edit-pwd{
+    margin-top:16px;
+    background-color: white;
+}
+
+.list-action{
+    margin-top: 24px;
+    margin-left: 56;
+}

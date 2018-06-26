@@ -13,7 +13,7 @@
   <Gradient height="100%" direction="to right" colors="#dae2f8, #d6a4a4" class="p-20">
     <ContentView [@flyInOut]="'in'" height="100%" width="100%" borderRadius="20">
 
-      <TabView [@from-bottom]="'in'" [selectedIndex]="myIndex">
+      <TabView [@from-bottom]="'in'" selectedIndex="3">
         <ng-container *ngFor="let compte of comptes; let i = index">
 
           <StackLayout [@fade-in]="'in'" class="transparent-area" height="100%" verticalAlignment="center" width="100%" *tabItem="{title: getTitles(i)}">

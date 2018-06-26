@@ -4,27 +4,18 @@ import { HomeComponent } from "~/home/home.component";
 import { VirementMotifComponent } from "~/virement-motif/virement-motif.component";
 import { Component } from "@angular/core";
 import { VirementExterneComponent } from "~/virementExterne/virementExterne.component";
-import { VirementExterneMotifComponent } from "~/virementExterne-motif/virement-motif.component";
 import { LoginComponent } from "~/login/login.component";
 import { RegisterComponent } from "~/register/register.component";
 import { Page2Component } from "~/rpage2/page2.component";
 import { VirementInterneMotifComponent } from "~/virementInterne-motif/virementInterne-motif.component";
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { VirementExterneMotifComponent } from "~/virementExterne-motif/virementExterne-motif.component";
 import { CodeComponent } from "~/code/code.component";
 import {NotificationModule} from "./notifications/notification.module";
-=======
-=======
->>>>>>> parent of 2f71185... itegration d'anciens composants 2
-=======
->>>>>>> parent of 2f71185... itegration d'anciens composants 2
-
->>>>>>> parent of 2f71185... itegration d'anciens composants 2
+import { EditProfilComponent } from "~/editProfil/editProfil.component";
 const APP_ROUTES: Routes = [
+  {path: "", redirectTo: "login", pathMatch: "full"},
   {
-    path: "",
+    path: "login",
     loadChildren: "./login/login.module#LoginModule"
   },
   {
@@ -69,11 +60,15 @@ const APP_ROUTES: Routes = [
   },
   {
     path: "virementInterne",
-    loadChildren: "~/virementInterne/virementInterne.module#virementInterneModule"
+    loadChildren: "~/virementInterne/virementInterne.module#VirementInterneModule"
   },
   {
     path: "virementInterneMotif",
     component: VirementInterneMotifComponent
+  },
+  {
+    path: "editProfil",
+    component: EditProfilComponent
   },
   {
     path: "historique",
@@ -86,6 +81,10 @@ const APP_ROUTES: Routes = [
   {
     path: "code",
     loadChildren: "~/code/code.module#CodedModule"
+  },
+  {
+    path: "profile",
+    loadChildren: "~/profile/profile.module#ProfileModule"
   },
 
 ];

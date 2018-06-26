@@ -1,0 +1,42 @@
+<ActionBar title="Edit Profil" class="ActionBarTitle">
+    
+    <NavigationButton text="Go Back" icon="res://ic_arrow_back" (tap)="goBack()"></NavigationButton>
+    <ActionItem ios.systemIcon="2" icon="res://ic_notifications" (tap)="goNotifications()" ios.position="right"></ActionItem>
+    <ActionItem ios.systemIcon="3" icon="res://ic_account" (tap)= "goProfile()" ios.position="right"></ActionItem>
+
+</ActionBar>
+
+<StackLayout  style="background-color: gainsboro">
+    <Image src="res://avatar" stretch="none" horizontalAlignment="center" class="profil-pic"></Image>
+    <StackLayout class="edit-info">
+        <Label text= "Informations Personnelles" class="list-info"></Label>
+        <ScrollView orientation="vertical">
+            <StackLayout>
+                <Label text = "Nom et Prenom" class="list-input" style="margin-left:16; margin-top:16"></Label>
+                <TextField hint="AZZI Amel"></TextField>
+
+                <Label text = "Tel" class="list-input" style="margin-left:16; margin-top:16"></Label>
+                <TextField hint="0659949808"></TextField>
+
+                <Label text = "Fonction" class="list-input" style="margin-left:16; margin-top:16"></Label>
+                <TextField hint="Etudiante"></TextField>
+
+                <Label text = "Fonction" class="list-input" style="margin-left:16; margin-top:16"></Label>
+                <TextField hint="Etudiante"></TextField>
+                <Label text = ""></Label>
+            </StackLayout>
+        </ScrollView>
+        
+    </StackLayout>
+
+    <StackLayout class="edit-pwd" (tap)="changePWD()">
+            <Label text = "Sécurité" class="list-info"></Label>
+            <StackLayout orientation="horizontal" class="list-item">
+                <Image src="res://ic_dzd_courant" stretch="none" horizontalAlignment="center"></Image>
+                <StackLayout orientation="horizontal">
+                    <Label text = "Changer mot de passe" class="list-label"></Label>
+                    <Image src="res://path" stretch="none" horizontalAlignment="center" class="list-action"></Image>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+</StackLayout>

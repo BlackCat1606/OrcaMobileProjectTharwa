@@ -1,31 +1,26 @@
- <ActionBar title="Historique" flat="true">
-    <ActionItem ios.position="left" (tap)="toggleTheMenu()" *ngIf="isIOS">
-      <Label class="mdi-actionitem mdi-menu" [text]="'mdi-hamburger' | fonticon"></Label>
-    </ActionItem>
-    <Label horizontalAlignment="left" class="mdi-actionitem mdi-menu" 
-    [text]="'mdi-hamburger' | fonticon" (tap)="toggleTheMenu()" *ngIf="!isIOS"></Label>
-    <Label horizontalAlignment="center" class="semibold" text="Acceuil" *ngIf="isIOS"></Label>
-    <ActionItem ios.systemIcon="2" icon="res://ic_notifications" ios.position="right" (tap)="goProfile()"></ActionItem>
-    <ActionItem ios.systemIcon="3" icon="res://ic_account" ios.position="right" (tap)="goProfile()"></ActionItem>
-  </ActionBar>
-
-    <GridLayout class="page page-content" tkMainContent>
+<ActionBar title="Historique" class="ActionBarTitle">
+    <ActionItem ios.systemIcon="2" icon="res://ic_notifications" (tap)="goNotifications()" ios.position="right"></ActionItem>
+    <ActionItem ios.systemIcon="3" icon="res://ic_account" (tap)="goProfile()" ios.position="right"></ActionItem>
+</ActionBar>
+<GridLayout class="main-content">
+    <Gradient height="100%" direction="to right" colors="#dae2f8, #d6a4a4" class="p-20">
         <ListView [items]="historicalArray">
             <ng-template let-item="item" let-i="index">
                 <StackLayout orientation="horizontal" class="list-item">
                     <Image [src]="item.avatar" stretch="none" horizontalAlignment="center"></Image>
                     <StackLayout orientation="vertical">
-                        <Label [text] = "item.interlocuteur" class="list-label"></Label>
-                        <StackLayout orientation="horizontal" class="list-cost" >
-                            <Label [text] = "item.montant"></Label>
+                        <Label [text]="item.interlocuteur" class="list-label" textWrap="true"></Label>
+                        <StackLayout orientation="horizontal" class="list-cost">
+                            <Label [text]="item.montant" textWrap="true"></Label>
                         </StackLayout>
-                        <Label [text] = "item.commission" class="list-cost"></Label>
+                        <Label [text]="item.commission" textWrap="true" class="list-cost"></Label>
                     </StackLayout>
                     <StackLayout orientation="vertical" class="list-date">
-                        <Label [text] = "item.date"></Label>
-                        <Label [text] = "item.time" class="time"></Label>
+                        <Label [text]="item.date"></Label>
+                        <Label [text]="item.time" class="time"></Label>
                     </StackLayout>
                 </StackLayout>
             </ng-template>
         </ListView>
-    </GridLayout>
+    </Gradient>
+</GridLayout>

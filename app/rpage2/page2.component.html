@@ -2,11 +2,11 @@
 	<ScrollView orientation="vertical">
 	<StackLayout>
 		<Image [src]="picture" stretch="aspectFill" horizontalAlignment="center" class="imageCss"></Image>
-		<FloatLabel placeholder="Adresse" hint="Adresse"  [(ngModel)]="user.address"></FloatLabel>
+		<TextField  hint="Adresse"  [(ngModel)]="user.address"></TextField>
 		
-		<FloatLabel placeholder ="Telephone" hint="Numero Telephone"  [(ngModel)]="user.phone"></FloatLabel>
+		<TextField  hint="Numero Telephone"  [(ngModel)]="user.phone"></TextField>
 		
-		<FloatLabel placeholder="Fonction" hint="Fonction"  [(ngModel)]="user.job"></TextField>
+		<TextField  hint="Fonction"  [(ngModel)]="user.job"></TextField>
 		
 		<Button class="profile-button" text="Photo de profil" (tap)="cameraOpen()"></Button>
 

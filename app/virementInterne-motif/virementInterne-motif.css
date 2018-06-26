@@ -8,10 +8,6 @@ ActionBar{
     font-size: 20pt;
 }
 
-StackLayout {
-    padding-bottom: 15;
-    background-color:white;
-}
 
 Button {
   margin-left: 32;

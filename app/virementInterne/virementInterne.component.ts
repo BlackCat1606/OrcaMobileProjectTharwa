@@ -135,7 +135,7 @@ export class VirementInterneComponent extends AbstractVirementComponent implemen
   }
 
   Next() {
-    if ((this.virement.destinataire) && (this.virement.montant)) {
+    if ((this.virement.montant)) {
       if (this.virement.montant > 0) {
         if (this.virement.montant < this.comptes[this.virement.emetteur].balance) {
           if (this.virement.montant > 200000) {

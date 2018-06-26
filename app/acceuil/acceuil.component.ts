@@ -1,7 +1,5 @@
 import { Component, ViewContainerRef, OnInit, AfterViewInit } from "@angular/core";
-import { animate, state, style, transition, trigger } from "@angular/animations";
 import { AbstractMenuPageComponent } from "../abstract-menu-page-component";
-import { Feedback } from "nativescript-feedback";
 import { ToastService } from "../services/toast.service";
 import { ToastHelper } from "../helpers/toast-helper";
 import { FeedbackHelper } from "../helpers/feedback-helper";
@@ -13,7 +11,6 @@ import { PluginInfo } from "../shared/plugin-info";
 import { PluginInfoWrapper } from "../shared/plugin-info-wrapper";
 import { CFAlertDialogHelper } from "../helpers/cfalertdialog-helper";
 import { Page, EventData, ContentView } from "ui/page";
-import { isAndroid, isIOS, device, screen } from "platform";
 import { UserService } from "../shared/user/user.service";
 import { User } from "../shared/user/user";
 import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
@@ -24,12 +21,9 @@ import * as dialogs from "ui/dialogs";
 import { Compte } from "../shared/compte/compte";
 import { CompteService } from "../shared/compte/compte.service";
 import { Config } from "../shared/config";
-import { registerElement } from "nativescript-angular/element-registry";
 import { NgZone } from "@angular/core";
-import { RouterExtensions } from "nativescript-angular/router";
 import { AppComponent } from "~/app.component";
 import { SocketIO } from "nativescript-socketio";
-import * as LocalNotifications from "nativescript-local-notifications";
 import { tharwaAnimations } from "~/utils/animations";
 import { CFAlertDialog } from "nativescript-cfalert-dialog";
 @Component({
@@ -65,10 +59,6 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
     cpt = 0;
     init = 0;
     myIndex;
-
-
-
-
     constructor(protected menuComponent: AppComponent,
         protected vcRef: ViewContainerRef,
         protected modalService: ModalDialogService,
@@ -102,10 +92,8 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
         });
         this.getTauxDechange('USD');
         this.getTauxDechange('EUR');
-        ////////////////////////////////
         let self = this;
         this.socketIO.on('notification', function (message) {
-            self.feedbackHelper.showInfo("Notification Tharwa", message);
             self.localNotificationsHelper.showWithSound("Notification Tharwa", message as string);
             self.getComptesInfo();
         });
@@ -177,22 +165,11 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
             title: "Type Virement",
             message: "Veuillez choisir le type de virement à effectuer",
             cancelButtonText: "ANNULER",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             actions: ["Virement vers un de mes comptes", "Virement Tharwa", "Virement Externe"]
-=======
-            actions: ["Virement vers un de mes comptes", "Virement Externe"]
->>>>>>> parent of 2f71185... itegration d'anciens composants 2
-=======
-            actions: ["Virement vers un de mes comptes", "Virement Externe"]
->>>>>>> parent of 2f71185... itegration d'anciens composants 2
-=======
-            actions: ["Virement vers un de mes comptes", "Virement Externe"]
->>>>>>> parent of 2f71185... itegration d'anciens composants 2
         }).then((result) => {
             let navigationExtras: NavigationExtras;
             if (result === "Virement vers un de mes comptes") {
+                if (this.comptes[accountType].etat !== 0) {
                 this.virementInterne = true;
                 navigationExtras = {
                     queryParams: {
@@ -200,9 +177,14 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
                         "'accountType'": accountType,
                     }
                 };
-                this.router.navigate(["/virement"], navigationExtras);
+                this.router.navigate(["/virementInterne"], navigationExtras);
             }
-            if (result === "Virement Externe") {
+            else {
+                this.feedbackHelper.showError(" Opération non autroisée ", "Compte Non validé ou bloqué" );
+            }
+            }
+            if (result === "Virement Tharwa") {
+                if (this.comptes[0].etat !== 0) {
                 if (accountType === 0) {
                     this.virementInterne = false;
                     navigationExtras = {
@@ -215,7 +197,29 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
                 else {
                     this.fancyAlertHelper.showWarning("Opération Non autorisée", "Vous pouvez faire un virement Externe a partir d'un compte Courant seulement");
                 }
+              } else {
+                this.feedbackHelper.showError(" Opération non autroisée ", "Compte Non validé ou bloqué" );
+              }
             }
+            if (result === "Virement Externe") {
+                if (this.comptes[0].etat !== 0) {
+                if (accountType === 0) {
+                    this.virementInterne = false;
+                    navigationExtras = {
+                        queryParams: {
+                            "'virementInterne'": this.virementInterne
+                        }
+                    };
+                    this.router.navigate(["/virementExterne"], navigationExtras);
+                }
+                else {
+                    this.fancyAlertHelper.showWarning("Opération Non autorisée", "Vous pouvez faire un virement Externe a partir d'un compte Courant seulement");
+                }
+            } else {
+                this.feedbackHelper.showError(" Opération non autroisée ", "Compte Non validé ou bloqué" );
+              }
+            }
+
 
         });
     }
@@ -223,6 +227,10 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
     goProfile() {
         this.router.navigate(["/profile"]);
     }
+    goNotifications() {
+        this.router.navigate(["/notifications"]);
+    }
+
     fabTap() {
 
         dialogs.action({
@@ -253,7 +261,6 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
     submit() {
         this.compteService.createAccount(Config.access_token, this.choice)
             .subscribe(response => {
-                //    response = response.json();
                 this.compte = new Compte();
                 this.compte.numCompte = response["Num"];
                 this.compte.balance = response["Balance"];
@@ -262,18 +269,11 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
                 this.compte.beneficiaire = response["IdUser"];
                 this.compte.etat = response["etat"];
                 this.compte.type = response["TypeCompte"];
-
-
-
                 this.comptes.push(this.compte);
-                /*
-                                var card: C ardComponent = new CardComponent(this.compte);
-                                this.tabList.push(card);*/
             },
                 (error) => {
                     console.log(error, "Test");
-                    //   this.feedbackHelper.showError();
-                    alert("Creation annulé" + JSON.stringify(error));
+                    this.feedbackHelper.showError("Erreur Creation!", error);
                 });
     }
     getAccountStyle(i): String {
@@ -347,7 +347,6 @@ export class AcceuilComponent extends AbstractMenuPageComponent implements OnIni
         }, 3600 * 1000);
 
     }
-
 
     protected getPluginInfo(): PluginInfoWrapper {
         return new PluginInfoWrapper(
